@@ -1,0 +1,14 @@
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.deps.json
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.runtimeconfig.json
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.runtimeconfig.dev.json
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.dll
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.csprojAssemblyReference.cache
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.csproj.CoreCompileInputs.cache
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.RazorAssemblyInfo.cache
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.RazorAssemblyInfo.cs
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.AssemblyInfoInputs.cache
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.AssemblyInfo.cs
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.RazorTargetAssemblyInfo.cache
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.pdb
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.dll
+D:\HOGENT\Windows\FlightAppAPI\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.pdb
