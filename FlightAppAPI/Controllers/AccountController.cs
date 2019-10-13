@@ -69,7 +69,7 @@ namespace FlightAppAPI.Controllers
         public async Task<ActionResult<string>> Register(RegisterDTO model)
         {
             IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            ApplicationUser appUser = new ApplicationUser { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, BirthDate = model.BirthDate };
+            ApplicationUser appUser = new Passenger { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, BirthDate = model.BirthDate };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlightAppAPI.Domain
 {
-    public class ApplicationUser
+    public abstract class ApplicationUser
     {
         public int ApplicationUserId { get; set; }
 
