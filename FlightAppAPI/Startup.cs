@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlightAppAPI.Data;
+using FlightAppAPI.Data.Repositories;
+using FlightAppAPI.Domain.IRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +36,7 @@ namespace FlightAppAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<ApplicationDbContext>(opts => opts.UseMySql(Configuration.GetConnectionString("DbContext")));
             services.AddScoped<DataInitializer>();
+            services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAuthentication(x =>
