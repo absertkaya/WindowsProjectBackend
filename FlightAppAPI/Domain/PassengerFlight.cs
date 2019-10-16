@@ -12,12 +12,13 @@ namespace FlightAppAPI.Domain
 
         public int PassengerId { get; set; }
         public int FlightId { get; set; }
-        
-
+  
         public Passenger Passenger { get; set; }
         public Flight Flight { get; set; }
 
-        [Required]
         public Seat Seat { get; set; }
+
+        public IList<Message> SentMessages { get; set; }
+        public IList<Message> ReceivedMessages { get; set; }
     }
 }

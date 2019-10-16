@@ -12,10 +12,13 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<StaffFlight> builder)
         {
+            builder.ToTable("StaffFlight");
+
             builder.HasKey(p => new { p.StaffId, p.FlightId });
 
             builder.HasOne(p => p.Staff).WithMany(s => s.StaffFlights).HasForeignKey(s => s.StaffId);
             builder.HasOne(p => p.Flight).WithMany(f => f.StaffFlights).HasForeignKey(f => f.FlightId);
+            builder.HasMany(p => p.Announcements).WithOne().IsRequired(true);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Plane> builder)
         {
+            builder.ToTable("Plane");
+
             builder.HasMany(p => p.Seats).WithOne().IsRequired(true);
             builder.HasMany(p => p.Flights).WithOne().IsRequired(true);
         }

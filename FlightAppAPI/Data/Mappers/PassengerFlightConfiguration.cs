@@ -12,11 +12,15 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<PassengerFlight> builder)
         {
+            builder.ToTable("PassengerFlight");
+
             builder.HasKey(p => p.PassengerFlightId);
 
             builder.HasOne(p => p.Passenger).WithMany(s => s.PassengerFlights).HasForeignKey(s => s.PassengerId);
             builder.HasOne(p => p.Flight).WithMany(f => f.PassengerFlights).HasForeignKey(f => f.FlightId);
             builder.HasOne(p => p.Seat).WithOne().HasForeignKey<Seat>(s => s.SeatId);
+            builder.HasMany(p => p.SentMessages).WithOne(m => m.Sender).IsRequired();
+            builder.HasMany(p => p.ReceivedMessages).WithOne(m => m.Receiver).IsRequired();
         }
     }
 }

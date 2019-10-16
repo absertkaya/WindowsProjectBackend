@@ -12,6 +12,8 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
+            builder.ToTable("ApplicationUser");
+
             builder.Property(p => p.LastName).IsRequired(true).HasMaxLength(255);
             builder.Property(p => p.FirstName).IsRequired(true).HasMaxLength(255);
             builder.Property(p => p.BirthDate).IsRequired(true);

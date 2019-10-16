@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace FlightAppAPI.Data.Mappers
 {
-    public class StaffConfiguration : IEntityTypeConfiguration<Staff>
+    public class SeatConfiguration : IEntityTypeConfiguration<Seat>
     {
-        public void Configure(EntityTypeBuilder<Staff> builder)
+        public void Configure(EntityTypeBuilder<Seat> builder)
         {
-            builder.ToTable("Staff");
-            builder.HasMany(p => p.HandledOrders).WithOne().IsRequired(false);
+            builder.ToTable("Seat");
+
+            builder.Property(s => s.SeatNr).IsRequired();
         }
     }
 }

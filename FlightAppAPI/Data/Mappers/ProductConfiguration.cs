@@ -12,6 +12,8 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.ToTable("Product");
+
             builder.Property(p => p.ProductName).IsRequired(true).HasMaxLength(255);
             builder.Property(p => p.Price).IsRequired(true);
             builder.Property(p => p.ProductType).IsRequired(true);

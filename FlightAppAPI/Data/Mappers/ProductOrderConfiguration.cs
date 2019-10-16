@@ -12,6 +12,8 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<ProductOrder> builder)
         {
+            builder.ToTable("ProductOrder");
+
             builder.HasKey(p => new { p.OrderId, p.ProductId });
 
             builder.HasOne(p => p.Order).WithMany(o => o.ProductOrders).HasForeignKey(s => s.OrderId);

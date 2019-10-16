@@ -10,17 +10,13 @@ namespace FlightAppAPI.Domain
     {
         public int ApplicationUserId { get; set; }
 
-        [Required]
+
         public string LastName { get; set; }
 
-        [Required]
         public string FirstName { get; set; }
 
-        [Required]
         public DateTime BirthDate { get; set; }
 
-        [Required]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
 }

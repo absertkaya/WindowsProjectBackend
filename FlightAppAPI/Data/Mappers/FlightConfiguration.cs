@@ -12,6 +12,8 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Flight> builder)
         {
+            builder.ToTable("Flight");
+
             builder.Property(p => p.DepartureDest).IsRequired(true).HasMaxLength(255);
             builder.Property(p => p.ArrivalDest).IsRequired(true).HasMaxLength(255);
         }

@@ -12,5 +12,7 @@ namespace FlightAppAPI.Domain
 
         public Staff Staff { get; set; }
         public Flight Flight { get; set; }
+
+        public IList<Announcement> Announcements { get; set; }
     }
 }
