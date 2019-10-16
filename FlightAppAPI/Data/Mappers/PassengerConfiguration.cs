@@ -14,7 +14,7 @@ namespace FlightAppAPI.Data.Mappers
         {
             builder.ToTable("Passenger");
 
-            builder.HasMany(p => p.PlacedOrders).WithOne().IsRequired();
+            
         }
     }
 }

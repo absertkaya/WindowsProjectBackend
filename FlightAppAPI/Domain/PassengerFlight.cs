@@ -20,5 +20,6 @@ namespace FlightAppAPI.Domain
 
         public IList<Message> SentMessages { get; set; }
         public IList<Message> ReceivedMessages { get; set; }
+        public IList<Order> PlacedOrders { get; set; }
     }
 }

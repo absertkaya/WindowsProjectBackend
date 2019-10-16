@@ -37,7 +37,7 @@ namespace FlightAppAPI.Data
             modelBuilder.ApplyConfiguration(new ProductOrderConfiguration());
             modelBuilder.ApplyConfiguration(new SeatConfiguration());
             modelBuilder.ApplyConfiguration(new StaffConfiguration());
-            modelBuilder.ApplyConfiguration(new StaffFlightConfiguration());   
+            modelBuilder.ApplyConfiguration(new StaffFlightConfiguration());
         }
     }
 }

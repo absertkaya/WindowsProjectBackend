@@ -21,6 +21,7 @@ namespace FlightAppAPI.Data.Mappers
             builder.HasOne(p => p.Seat).WithOne().HasForeignKey<Seat>(s => s.SeatId);
             builder.HasMany(p => p.SentMessages).WithOne(m => m.Sender).IsRequired();
             builder.HasMany(p => p.ReceivedMessages).WithOne(m => m.Receiver).IsRequired();
+            builder.HasMany(p => p.PlacedOrders).WithOne().IsRequired();
         }
     }
 }
