@@ -37,6 +37,7 @@ namespace FlightAppAPI
             services.AddDbContext<ApplicationDbContext>(opts => opts.UseMySql(Configuration.GetConnectionString("DbContext")));
             services.AddScoped<DataInitializer>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAuthentication(x =>
@@ -98,7 +99,7 @@ namespace FlightAppAPI
 
             app.UseMvc();
 
-            dataInitializer.InitializeData().Wait();
+            //dataInitializer.InitializeData().Wait();
         }
     }
 }

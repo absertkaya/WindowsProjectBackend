@@ -13,7 +13,9 @@ namespace FlightAppAPI.Data.Mappers
         public void Configure(EntityTypeBuilder<Staff> builder)
         {
             builder.ToTable("Staff");
+
             builder.HasMany(p => p.HandledOrders).WithOne().IsRequired(false);
+            builder.HasMany(p => p.StaffFlights).WithOne(s => s.Staff).IsRequired();
         }
     }
 }
