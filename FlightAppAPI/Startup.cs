@@ -109,7 +109,7 @@ namespace FlightAppAPI
 
             app.UseMvc();
 
-            dataInitializer.InitializeData().Wait();
+            //dataInitializer.InitializeData().Wait();
         }
     }
 }
