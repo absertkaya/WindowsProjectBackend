@@ -10,5 +10,6 @@ namespace FlightAppAPI.Domain
         public int SeatId { get; set; }
         public int SeatNr { get; set; }
         public ClassType ClassType { get; set; }
+        public PassengerFlight Passenger { get; set; }
     }
 }

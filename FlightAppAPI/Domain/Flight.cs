@@ -12,8 +12,5 @@ namespace FlightAppAPI.Domain
         public DateTime ArrivalTime { get; set; }
         public string DepartureDest { get; set; }
         public string ArrivalDest { get; set; }
-
-        public IList<PassengerFlight> PassengerFlights { get; set; }
-        public IList<StaffFlight> StaffFlights { get; set; }
     }
 }

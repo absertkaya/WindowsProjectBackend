@@ -17,6 +17,9 @@ namespace FlightAppAPI.Data
         public DbSet<Passenger> Passengers { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<Seat> Seats { get; set; }
+        public DbSet<Flight> Flights { get; set; }
+        public DbSet<Plane> Planes { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) : base(opts)
         {

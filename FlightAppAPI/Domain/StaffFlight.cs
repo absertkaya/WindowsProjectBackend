@@ -14,5 +14,24 @@ namespace FlightAppAPI.Domain
         public Flight Flight { get; set; }
 
         public IList<Announcement> Announcements { get; set; }
+
+        public StaffFlight(Staff staff, Flight flight)
+        {
+            Staff = staff;
+            StaffId = staff.ApplicationUserId;
+            Flight = flight;
+            FlightId = flight.FlightId;
+            Announcements = new List<Announcement>();
+        }
+        
+        protected StaffFlight()
+        {
+
+        }
+
+        public void AddAnnouncement(Announcement announcement)
+        {
+            Announcements.Add(announcement);
+        }
     }
 }

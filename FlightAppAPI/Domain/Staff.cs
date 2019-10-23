@@ -11,5 +11,16 @@ namespace FlightAppAPI.Domain
         public IList<Order> HandledOrders { get; set; }
 
         public IList<StaffFlight> StaffFlights { get; set; }
+
+        public Staff()
+        {
+            HandledOrders = new List<Order>();
+            StaffFlights = new List<StaffFlight>();
+        }
+
+        public void AddFlight(Flight flight)
+        {
+            StaffFlights.Add(new StaffFlight(this, flight));
+        }
     }
 }

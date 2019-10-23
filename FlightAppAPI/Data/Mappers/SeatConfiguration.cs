@@ -15,6 +15,7 @@ namespace FlightAppAPI.Data.Mappers
             builder.ToTable("Seat");
 
             builder.Property(s => s.SeatNr).IsRequired();
+            builder.HasOne(s => s.Passenger).WithOne(p => p.Seat).HasForeignKey<PassengerFlight>(p => p.SeatRef);
         }
     }
 }

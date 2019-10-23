@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace FlightAppAPI
 {
@@ -58,6 +59,11 @@ namespace FlightAppAPI
                 };
             });
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Flight API", Version = "v1" });
+            });
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -96,10 +102,14 @@ namespace FlightAppAPI
             app.UseHttpsRedirection();
             app.UseAuthentication();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "post API V1");
+             });
 
             app.UseMvc();
 
-            //dataInitializer.InitializeData().Wait();
+            dataInitializer.InitializeData().Wait();
         }
     }
 }

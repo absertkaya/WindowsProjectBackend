@@ -11,5 +11,12 @@ namespace FlightAppAPI.Domain
         public DateTime Timestamp { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+
+        public Announcement(string title, string content)
+        {
+            Title = title;
+            Content = content;
+            Timestamp = DateTime.Now;
+        }
     }
 }
