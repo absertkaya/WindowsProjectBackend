@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Domain
 {
@@ -9,7 +7,12 @@ namespace FlightAppAPI.Domain
     {
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }
+        
+        public IList<OrderLine> OrderLines { get; set; }
 
-        public IList<ProductOrder> ProductOrders { get; set; }
+        public Order()
+        {
+            OrderLines = new List<OrderLine>();
+        }
     }
 }

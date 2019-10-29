@@ -17,7 +17,7 @@ namespace FlightAppAPI.Data.Mappers
             builder.Property(p => p.ProductName).IsRequired(true).HasMaxLength(255);
             builder.Property(p => p.Price).IsRequired(true);
             builder.Property(p => p.ProductType).IsRequired(true);
-            builder.Property(p => p.amountInStock).IsRequired(true);
+            builder.Property(p => p.AmountInStock).IsRequired(true);
         }
     }
 }

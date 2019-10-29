@@ -1,16 +1,18 @@
 ﻿using FlightAppAPI.Domain;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.DTOs
 {
     public class AnnouncementDTO
     {
+        [Required]
         public int AnnouncementId { get; set; }
+        [Required]
         public DateTime TimeStamp { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Content { get; set; }
 
         public static AnnouncementDTO FromAnnouncement(Announcement announcement)

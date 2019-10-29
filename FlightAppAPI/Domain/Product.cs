@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.Domain
 {
     public class Product
     {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public decimal Price { get; set; }
-        public int amountInStock { get; set; }
-        public ProductType ProductType { get; set; }
+        private decimal _price;
 
-        
+        public int ProductId { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string ProductName { get; set; }
+        [Required]
+        public decimal Price {
+            get { return _price; }
+            set { if (value > 0) _price = value; }
+        }
+        [Required]
+        public int AmountInStock { get; set; }
+        [Required]
+        public ProductType ProductType { get; set; }
     }
 }

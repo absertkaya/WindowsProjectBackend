@@ -9,7 +9,6 @@ namespace FlightAppAPI.Data
 {
     public class DataInitializer
     {
-
         private readonly ApplicationDbContext _ctx;
         private readonly UserManager<IdentityUser> _um;
 
@@ -24,7 +23,7 @@ namespace FlightAppAPI.Data
             if (_ctx.Database.EnsureDeleted())
             {
                 _ctx.Database.EnsureCreated();
-                Product proteinBar = new Product() {ProductName = "Protein Bar", Price = 5, amountInStock = 20, ProductType = ProductType.FOOD };
+                Product proteinBar = new Product() {ProductName = "Protein Bar", Price = 5, AmountInStock = 20, ProductType = ProductType.FOOD };
                 _ctx.Products.Add(proteinBar);
 
                 string email = "dude@gmail.com";
@@ -38,38 +37,38 @@ namespace FlightAppAPI.Data
                 _ctx.Staff.Add(staff);
 
                 IList<Seat> seats = new List<Seat>()
-            {
-                new Seat() {SeatNr = 1, ClassType = ClassType.FIRST, SeatId = 1},
-                new Seat() {SeatNr = 1, ClassType = ClassType.ECONOMY, SeatId = 2}
-            };
+                {
+                    new Seat() {SeatNr = 1, ClassType = ClassType.FIRST, SeatId = 1},
+                    new Seat() {SeatNr = 1, ClassType = ClassType.ECONOMY, SeatId = 2}
+                };
 
                 seats.ToList().ForEach(s => _ctx.Add(s));
 
                 IList<Flight> flights = new List<Flight>()
-            {
-                new Flight() {
-                    FlightId = 1,
-                    ArrivalDest = "New York",
-                    DepartureDest = "Brussels",
-                    ArrivalTime = DateTime.Parse("2019/10/25"),
-                    DepartureTime = DateTime.Now
-                },
-                new Flight() {
-                    FlightId = 2,
-                    ArrivalDest = "Bangkok",
-                    DepartureDest = "Brussels",
-                    ArrivalTime = DateTime.Parse("2019/10/27"),
-                    DepartureTime = DateTime.Now.AddDays(1)
-                },
-            };
+                {
+                    new Flight() {
+                        FlightId = 1,
+                        ArrivalDest = "New York",
+                        DepartureDest = "Brussels",
+                        ArrivalTime = DateTime.Parse("2019/10/25"),
+                        DepartureTime = DateTime.Now
+                    },
+                    new Flight() {
+                        FlightId = 2,
+                        ArrivalDest = "Bangkok",
+                        DepartureDest = "Brussels",
+                        ArrivalTime = DateTime.Parse("2019/10/27"),
+                        DepartureTime = DateTime.Now.AddDays(1)
+                    },
+                };
 
                 flights.ToList().ForEach(f => _ctx.Flights.Add(f));
 
                 IList<Announcement> announcements = new List<Announcement>()
-            {
-                new Announcement("Discount on food", "there is a 20% discount going on right now"),
-                new Announcement("Stop pissing next to the toilet", "Some guy keeps pissing on the floor")
-            };
+                {
+                    new Announcement() { Title = "Discount on food", Content = "there is a 20% discount going on right now" },
+                    new Announcement() { Title = "Stop pissing next to the toilet", Content = "Some guy keeps pissing on the floor" }
+                };
 
                 announcements.ToList().ForEach(a => _ctx.Announcements.Add(a));
 
@@ -82,7 +81,6 @@ namespace FlightAppAPI.Data
 
                 _ctx.SaveChanges();
             }
-            
         }
 
         private async Task CreateUser(string email, string password)

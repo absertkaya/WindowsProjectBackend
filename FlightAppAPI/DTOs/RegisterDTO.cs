@@ -6,11 +6,11 @@ namespace FlightAppAPI.DTOs
     public class RegisterDTO : LoginDTO
     {
         [Required]
-        [StringLength(255)]
+        [MaxLength(40)]
         public string FirstName { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [MaxLength(40)]
         public string LastName { get; set; }
 
         [Required]

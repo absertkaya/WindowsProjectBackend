@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.Domain
 {
     public class Companion
     {
-        public int PassengerFlight1Id { get; set; }
-        public int PassengerFlight2Id { get; set; }
+        public int FlightId1 { get; set; }
+        public int FlightId2 { get; set; }
 
-        public PassengerFlight PassengerFlight1 { get; set; }
-        public PassengerFlight PassengerFlight2 { get; set; }
+        [Required]
+        public PassengerFlight Flight1 { get; set; }
+        [Required]
+        public PassengerFlight Flight2 { get; set; }
     }
 }

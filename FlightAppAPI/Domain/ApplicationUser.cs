@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Domain
 {
     public abstract class ApplicationUser
     {
         public int ApplicationUserId { get; set; }
-
-
+        [Required]
+        [MaxLength(40)]
         public string LastName { get; set; }
-
+        [Required]
+        [MaxLength(40)]
         public string FirstName { get; set; }
-
+        [Required]
         public DateTime BirthDate { get; set; }
-
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
     }
 }

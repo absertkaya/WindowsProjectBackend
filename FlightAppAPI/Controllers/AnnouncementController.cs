@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FlightAppAPI.Domain;
 using FlightAppAPI.Domain.IRepositories;
 using FlightAppAPI.DTOs;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightAppAPI.Controllers
@@ -21,8 +17,7 @@ namespace FlightAppAPI.Controllers
         {
             _announcementRepo = announcementRepo;
         }
-
-        [AllowAnonymous]
+        
         [HttpGet("get_all")]
         public IEnumerable<AnnouncementDTO> GetAllAnnouncements()
         {

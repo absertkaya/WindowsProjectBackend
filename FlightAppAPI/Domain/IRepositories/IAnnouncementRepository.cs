@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FlightAppAPI.Domain.IRepositories
 {
@@ -13,6 +10,5 @@ namespace FlightAppAPI.Domain.IRepositories
         IList<Announcement> GetAllAnnouncements();
         Announcement GetById(int id);
         void SaveChanges(Announcement announcement);
-       
     }
 }

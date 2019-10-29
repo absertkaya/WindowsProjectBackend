@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FlightAppAPI.Domain
 {
@@ -17,10 +14,6 @@ namespace FlightAppAPI.Domain
         public void AddFlight(Flight flight, Seat seat)
         {
             PassengerFlights.Add(new PassengerFlight(this, flight, seat));
+        }
     }
-    }
-
-
-
-    
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.Domain
 {
@@ -9,7 +6,9 @@ namespace FlightAppAPI.Domain
     {
         public int SeatId { get; set; }
         public int SeatNr { get; set; }
+        [Required]
         public ClassType ClassType { get; set; }
+        [Required]
         public PassengerFlight Passenger { get; set; }
     }
 }

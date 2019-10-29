@@ -13,10 +13,10 @@ namespace FlightAppAPI.Data.Mappers
         public void Configure(EntityTypeBuilder<Companion> builder)
         {
             builder.ToTable("Companion");
-            builder.HasKey(c => new {c.PassengerFlight1Id, c.PassengerFlight2Id });
+            builder.HasKey(c => new {c.FlightId1, c.FlightId2 });
 
-            builder.HasOne(p => p.PassengerFlight1).WithMany().HasForeignKey(s => s.PassengerFlight1Id);
-            builder.HasOne(p => p.PassengerFlight2).WithMany().HasForeignKey(s => s.PassengerFlight2Id);
+            builder.HasOne(p => p.Flight1).WithMany().HasForeignKey(s => s.FlightId1);
+            builder.HasOne(p => p.Flight2).WithMany().HasForeignKey(s => s.FlightId2);
         }
     }
 }

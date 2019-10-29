@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.Domain
 {
@@ -10,23 +8,24 @@ namespace FlightAppAPI.Domain
         public int StaffId { get; set; }
         public int FlightId { get; set; }
 
+        [Required]
         public Staff Staff { get; set; }
+        [Required]
         public Flight Flight { get; set; }
 
         public IList<Announcement> Announcements { get; set; }
+        
+        protected StaffFlight()
+        {
+            Announcements = new List<Announcement>();
+        }
 
-        public StaffFlight(Staff staff, Flight flight)
+        public StaffFlight(Staff staff, Flight flight) : this()
         {
             Staff = staff;
             StaffId = staff.ApplicationUserId;
             Flight = flight;
             FlightId = flight.FlightId;
-            Announcements = new List<Announcement>();
-        }
-        
-        protected StaffFlight()
-        {
-
         }
 
         public void AddAnnouncement(Announcement announcement)

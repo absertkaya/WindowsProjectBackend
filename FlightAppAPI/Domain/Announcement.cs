@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.Domain
 {
     public class Announcement
     {
         public int AnnouncementId { get; set; }
+        [Required]
         public DateTime Timestamp { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string Title { get; set; }
+        [Required]
+        [MaxLength(255)]
         public string Content { get; set; }
 
-        public Announcement(string title, string content)
+        public Announcement()
         {
-            Title = title;
-            Content = content;
             Timestamp = DateTime.Now;
         }
     }

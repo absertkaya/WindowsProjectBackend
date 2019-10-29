@@ -25,10 +25,10 @@ namespace FlightAppAPI.Controllers
         private readonly IConfiguration _config;
 
         public AccountController(
-          SignInManager<IdentityUser> signInManager,
-          UserManager<IdentityUser> userManager,
-          IApplicationUserRepository userRepository,
-          IConfiguration config)
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager,
+            IApplicationUserRepository userRepository,
+            IConfiguration config)
         {
             _signInManager = signInManager;
             _userManager = userManager;
