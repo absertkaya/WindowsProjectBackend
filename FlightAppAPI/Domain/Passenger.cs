@@ -9,6 +9,7 @@ namespace FlightAppAPI.Domain
         public Passenger()
         {
             PassengerFlights = new List<PassengerFlight>();
+            Type = UserType.PASSENGER;
         }
 
         public void AddFlight(Flight flight, Seat seat)

@@ -2,8 +2,10 @@
 {
     public interface IApplicationUserRepository
     {
-        ApplicationUser GetBy(string email);
-        void Add(ApplicationUser user);
+        Staff GetStaffBy(string email);
+        Passenger GetPassengerBy(string email);
+        void AddStaff(Staff user);
+        void AddPassenger(Passenger user);
         void SaveChanges();
     }
 }

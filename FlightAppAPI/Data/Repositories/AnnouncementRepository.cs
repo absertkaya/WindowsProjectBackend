@@ -17,14 +17,16 @@ namespace FlightAppAPI.Data.Repositories
             _ctx = ctx;
         }
 
-        public void Add(Announcement announcement)
+        public void Add(Announcement announcement, Staff sender)
         {
-            _ctx.Announcements.Add(announcement);
+            _ctx.Staff.FirstOrDefault(s => s.Equals(sender)).StaffFlights[0].Announcements.Add(announcement);
+            _ctx.SaveChanges();
         }
 
         public void Delete(Announcement announcement)
         {
             _ctx.Announcements.Remove(announcement);
+            _ctx.SaveChanges();
         }
 
         public IList<Announcement> GetAllAnnouncements()
@@ -37,7 +39,7 @@ namespace FlightAppAPI.Data.Repositories
             return _ctx.Announcements.Find(id);
         }
 
-        public void SaveChanges(Announcement announcement)
+        public void SaveChanges()
         {
             _ctx.SaveChanges();
         }
@@ -45,6 +47,7 @@ namespace FlightAppAPI.Data.Repositories
         public void Update(Announcement announcement)
         {
             _ctx.Announcements.Update(announcement);
+            SaveChanges();
         }
     }
 }

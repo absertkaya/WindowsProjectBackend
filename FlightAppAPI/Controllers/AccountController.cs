@@ -14,11 +14,14 @@ using FlightAppAPI.Domain;
 
 namespace FlightAppAPI.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     [ApiConventionType(typeof(DefaultApiConventions))]
     public class AccountController : ControllerBase
     {
+        #region Init
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IApplicationUserRepository _userRepository;
@@ -35,66 +38,77 @@ namespace FlightAppAPI.Controllers
             _userRepository = userRepository;
             _config = config;
         }
+        #endregion
 
+        // POST: api/Account
         /// <summary>
         /// Login
         /// </summary>
-        /// <param name="model">the login details</param>
-        [AllowAnonymous]
+        /// <param name="model">The login details</param>
+        /// <returns>201: JWT token</returns>
         [HttpPost]
-        public async Task<ActionResult<string>> CreateToken(LoginDTO model)
+        public async Task<ActionResult<string>> Login(LoginDTO model)
         {
-            var user = await _userManager.FindByNameAsync(model.Email);
-
-            if (user != null)
+            try
             {
-                var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
-
-                if (result.Succeeded)
+                IdentityUser user = await _userManager.FindByNameAsync(model.Email);
+                if (user != null)
                 {
-                    string token = GetToken(user);
-                    return Created("", token); //returns only the token                    
+                    var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+
+                    if (result.Succeeded)
+                    {
+                        string token = GetToken(user);
+                        return Created("", token);               
+                    }
                 }
-            }
-            return BadRequest();
+                return BadRequest("Invalid login credentials");
+            } catch(Exception e) { return BadRequest(e.Message); }
         }
 
+        // POST: api/Announcement/register
         /// <summary>
         /// Register a user
         /// </summary>
-        /// <param name="model">the user details</param>
-        /// <returns></returns>
-        [AllowAnonymous]
+        /// <param name="model">The user details</param>
+        /// <returns>201: JWT token</returns>
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(RegisterDTO model)
         {
-            IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
-            ApplicationUser appUser = new Passenger { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, BirthDate = model.BirthDate };
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            if (result.Succeeded)
+            try
             {
-                _userRepository.Add(appUser);
-                _userRepository.SaveChanges();
-                string token = GetToken(user);
-                return Created("", token);
-            }
-            return BadRequest();
+                IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                Passenger appUser = new Passenger { Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, BirthDate = model.BirthDate };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    _userRepository.AddPassenger(appUser);
+                    _userRepository.SaveChanges();
+                    string token = GetToken(user);
+                    return Created("", token);
+                }
+                return BadRequest("Could not register.");
+            } catch (Exception e) { return BadRequest(e.Message); }
         }
 
+        // GET: api/Announcement/CheckAvailableUsername
         /// <summary>
         /// Checks if an email is available as username
         /// </summary>
-        /// <returns>true if the email is not registered yet</returns>
-        /// <param name="email">Email.</param>/
-        [AllowAnonymous]
+        /// <param name="email">Email</param>
+        /// <returns>200: True if email is available</returns>
         [HttpGet("checkusername")]
         public async Task<ActionResult<bool>> CheckAvailableUserName(string email)
         {
-            var user = await _userManager.FindByNameAsync(email);
-            return user == null;
+            try
+            {
+                IdentityUser user = await _userManager.FindByNameAsync(email);
+                return Ok(user == null);
+            } catch (Exception e) { return BadRequest(e.Message); }
         }
 
+        #region Functions
         private string GetToken(IdentityUser user)
         {
             // Create the token
@@ -111,10 +125,11 @@ namespace FlightAppAPI.Controllers
             var token = new JwtSecurityToken(
               null, null,
               claims,
-              expires: DateTime.Now.AddMinutes(30),
+              expires: DateTime.Now.AddMinutes(90),
               signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        #endregion
     }
 }

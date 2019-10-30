@@ -1,9 +1,7 @@
 ﻿using FlightAppAPI.Domain;
 using FlightAppAPI.Domain.IRepositories;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Data.Repositories
 {
@@ -17,14 +15,24 @@ namespace FlightAppAPI.Data.Repositories
             _ctx = ctx;
         }
 
-        public void Add(ApplicationUser user)
+        public void AddStaff(Staff user)
         {
-            _ctx.ApplicationUsers.Add(user);
+            _ctx.Staff.Add(user);
         }
 
-        public ApplicationUser GetBy(string email)
+        public void AddPassenger(Passenger user)
         {
-            return _ctx.ApplicationUsers.FirstOrDefault(u => u.Email == email);
+            _ctx.Passengers.Add(user);
+        }
+
+        public Passenger GetPassengerBy(string email)
+        {
+            return _ctx.Passengers.FirstOrDefault(u => u.Email == email);
+        }
+
+        public Staff GetStaffBy(string email)
+        {
+            return _ctx.Staff.Include(s => s.StaffFlights).FirstOrDefault(u => u.Email == email);
         }
 
         public void SaveChanges()

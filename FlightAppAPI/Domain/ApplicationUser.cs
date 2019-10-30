@@ -17,5 +17,7 @@ namespace FlightAppAPI.Domain
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        [Required]
+        public UserType Type { get; set; }
     }
 }

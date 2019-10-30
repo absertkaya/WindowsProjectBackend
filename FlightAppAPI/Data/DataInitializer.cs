@@ -26,7 +26,7 @@ namespace FlightAppAPI.Data
                 Product proteinBar = new Product() {ProductName = "Protein Bar", Price = 5, AmountInStock = 20, ProductType = ProductType.FOOD };
                 _ctx.Products.Add(proteinBar);
 
-                string email = "dude@gmail.com";
+                string email = "client@gmail.com";
                 Passenger p1 = new Passenger() { BirthDate = DateTime.Parse("1980/10/10"), Email = email, FirstName = "bob", LastName = "van damme" };
                 await CreateUser(email, "Password1*");
                 email = "staff@gmail.com";

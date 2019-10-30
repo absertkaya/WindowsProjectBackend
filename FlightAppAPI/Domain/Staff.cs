@@ -11,6 +11,7 @@ namespace FlightAppAPI.Domain
         {
             HandledOrders = new List<Order>();
             StaffFlights = new List<StaffFlight>();
+            Type = UserType.STAFF;
         }
 
         public void AddFlight(Flight flight)

@@ -4,11 +4,11 @@ namespace FlightAppAPI.Domain.IRepositories
 {
     public interface IAnnouncementRepository
     {
-        void Add(Announcement announcement);
+        void Add(Announcement announcement, Staff sender);
         void Delete(Announcement announcement);
         void Update(Announcement announcement);
         IList<Announcement> GetAllAnnouncements();
         Announcement GetById(int id);
-        void SaveChanges(Announcement announcement);
+        void SaveChanges();
     }
 }
