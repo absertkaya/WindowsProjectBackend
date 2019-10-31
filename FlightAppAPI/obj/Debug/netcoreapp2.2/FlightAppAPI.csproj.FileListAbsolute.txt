@@ -40,3 +40,17 @@ C:\Users\Bono\source\repos\ASP.NET\UWP_FlightApp\WindowsProjectBackend\WindowsPr
 C:\Users\Bono\source\repos\ASP.NET\UWP_FlightApp\WindowsProjectBackend\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.RazorTargetAssemblyInfo.cache
 C:\Users\Bono\source\repos\ASP.NET\UWP_FlightApp\WindowsProjectBackend\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.dll
 C:\Users\Bono\source\repos\ASP.NET\UWP_FlightApp\WindowsProjectBackend\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.pdb
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.deps.json
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.runtimeconfig.json
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.runtimeconfig.dev.json
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.dll
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\bin\Debug\netcoreapp2.2\FlightAppAPI.pdb
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.csprojAssemblyReference.cache
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.csproj.CoreCompileInputs.cache
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.RazorAssemblyInfo.cache
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.RazorAssemblyInfo.cs
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.AssemblyInfoInputs.cache
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.AssemblyInfo.cs
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.RazorTargetAssemblyInfo.cache
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.dll
+D:\HOGENT\Windows\WindowsProjectBackend\FlightAppAPI\obj\Debug\netcoreapp2.2\FlightAppAPI.pdb

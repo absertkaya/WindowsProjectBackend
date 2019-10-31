@@ -76,7 +76,7 @@ namespace FlightAppAPI.Data
                 seats[13].Passenger = passengers[6];
                 seats[14].Passenger = passengers[7];
                 seats[15].Passenger = passengers[8];
-                passengers[0].Friends.Add(passengers[1]);
+                passengers[0].AddFriend(passengers[1]);
                 await CreateUser("p1@gmail.com", "Password1*");
                 await CreateUser("p2@gmail.com", "Password1*");
                 await CreateUser("p3@gmail.com", "Password1*");
