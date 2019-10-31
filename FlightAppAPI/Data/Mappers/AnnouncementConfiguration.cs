@@ -1,10 +1,6 @@
 ﻿using FlightAppAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Data.Mappers
 {
@@ -12,10 +8,13 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Announcement> builder)
         {
-            builder.ToTable("Announcement");
+            builder.ToTable("Announcements");
 
-            builder.Property(a => a.Content).IsRequired().HasMaxLength(1023);
-            builder.Property(a => a.Title).IsRequired().HasMaxLength(255);
+            builder.HasKey(a => a.Id);
+            builder.Property(a => a.Timestamp).IsRequired();
+            builder.Property(a => a.Title).IsRequired().HasMaxLength(100);
+            builder.Property(a => a.Content).IsRequired().HasMaxLength(255);
+            builder.HasOne(a => a.Sender).WithMany(s => s.SentAnnouncements).IsRequired();
         }
     }
 }

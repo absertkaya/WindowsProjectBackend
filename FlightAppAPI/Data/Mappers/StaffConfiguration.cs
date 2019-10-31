@@ -1,10 +1,6 @@
 ﻿using FlightAppAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Data.Mappers
 {
@@ -13,9 +9,9 @@ namespace FlightAppAPI.Data.Mappers
         public void Configure(EntityTypeBuilder<Staff> builder)
         {
             builder.ToTable("Staff");
-
-            builder.HasMany(p => p.HandledOrders).WithOne().IsRequired(false);
-            builder.HasMany(p => p.StaffFlights).WithOne(s => s.Staff).IsRequired();
+            
+            builder.HasMany(s => s.SentAnnouncements).WithOne(a => a.Sender);
+            builder.HasOne(p => p.Flight).WithMany(f => f.Staff).IsRequired();
         }
     }
 }

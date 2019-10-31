@@ -5,7 +5,7 @@ namespace FlightAppAPI.Domain
 {
     public class Announcement
     {
-        public int AnnouncementId { get; set; }
+        public int Id { get; set; }
         [Required]
         public DateTime Timestamp { get; set; }
         [Required]
@@ -14,6 +14,8 @@ namespace FlightAppAPI.Domain
         [Required]
         [MaxLength(255)]
         public string Content { get; set; }
+        [Required]
+        public Staff Sender { get; set; }
 
         public Announcement()
         {

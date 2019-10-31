@@ -4,11 +4,13 @@ namespace FlightAppAPI.Domain
 {
     public class Seat
     {
-        public int SeatId { get; set; }
-        public int SeatNr { get; set; }
+        public int Id { get; set; }
+        [Required]
+        public int Nr { get; set; }
         [Required]
         public ClassType ClassType { get; set; }
+        public Passenger Passenger { get; set; }
         [Required]
-        public PassengerFlight Passenger { get; set; }
+        public Flight Flight { get; set; }
     }
 }

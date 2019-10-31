@@ -1,10 +1,6 @@
 ﻿using FlightAppAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Data.Mappers
 {
@@ -12,10 +8,13 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Seat> builder)
         {
-            builder.ToTable("Seat");
+            builder.ToTable("Seats");
 
-            builder.Property(s => s.SeatNr).IsRequired();
-            builder.HasOne(s => s.Passenger).WithOne(p => p.Seat).HasForeignKey<PassengerFlight>(p => p.SeatRef);
+            builder.HasKey(s => s.Id);
+            builder.Property(s => s.Nr).IsRequired();
+            builder.Property(s => s.ClassType).IsRequired();
+            builder.HasOne(s => s.Passenger).WithOne(p => p.Seat);
+            builder.HasOne(s => s.Flight).WithMany(f => f.Seats).IsRequired();
         }
     }
 }

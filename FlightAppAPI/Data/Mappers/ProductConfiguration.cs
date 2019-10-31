@@ -1,10 +1,6 @@
 ﻿using FlightAppAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Data.Mappers
 {
@@ -12,12 +8,14 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.ToTable("Product");
+            builder.ToTable("Products");
 
-            builder.Property(p => p.ProductName).IsRequired(true).HasMaxLength(255);
-            builder.Property(p => p.Price).IsRequired(true);
-            builder.Property(p => p.ProductType).IsRequired(true);
-            builder.Property(p => p.AmountInStock).IsRequired(true);
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
+            builder.Property(p => p.Picture).IsRequired();
+            builder.Property(p => p.Description).HasMaxLength(255);
+            builder.Property(p => p.Price).IsRequired();
+            builder.Property(p => p.Type).IsRequired();
         }
     }
 }

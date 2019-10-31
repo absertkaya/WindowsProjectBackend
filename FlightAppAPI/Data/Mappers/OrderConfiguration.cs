@@ -1,10 +1,6 @@
 ﻿using FlightAppAPI.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FlightAppAPI.Data.Mappers
 {
@@ -12,7 +8,12 @@ namespace FlightAppAPI.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.ToTable("Order");
+            builder.ToTable("Orders");
+
+            builder.HasKey(o => o.Id);
+            builder.Property(o => o.Timestamp).IsRequired();
+            builder.Property(o => o.OrderStatus).IsRequired();
+            builder.HasMany(o => o.OrderLines).WithOne(l => l.Order);
         }
     }
 }

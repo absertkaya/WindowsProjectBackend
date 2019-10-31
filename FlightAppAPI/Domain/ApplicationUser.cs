@@ -5,7 +5,7 @@ namespace FlightAppAPI.Domain
 {
     public abstract class ApplicationUser
     {
-        public int ApplicationUserId { get; set; }
+        public int Id { get; set; }
         [Required]
         [MaxLength(40)]
         public string LastName { get; set; }

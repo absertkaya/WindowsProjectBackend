@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.Domain
 {
@@ -6,18 +7,20 @@ namespace FlightAppAPI.Domain
     {
         private decimal _price;
 
-        public int ProductId { get; set; }
+        public int Id { get; set; }
         [Required]
         [MaxLength(100)]
-        public string ProductName { get; set; }
+        public string Name { get; set; }
+        [MaxLength(255)]
+        public string Description { get; set; }
+        [Required]
+        public string Picture { get; set; }
         [Required]
         public decimal Price {
             get { return _price; }
-            set { if (value > 0) _price = value; }
+            set { if (value <= 0) throw new ArgumentException("Product price can't be 0 or negative."); _price = value; }
         }
         [Required]
-        public int AmountInStock { get; set; }
-        [Required]
-        public ProductType ProductType { get; set; }
+        public ProductType Type { get; set; }
     }
 }

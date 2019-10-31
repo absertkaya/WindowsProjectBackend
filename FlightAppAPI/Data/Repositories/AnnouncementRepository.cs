@@ -19,7 +19,7 @@ namespace FlightAppAPI.Data.Repositories
 
         public void Add(Announcement announcement, Staff sender)
         {
-            _ctx.Staff.FirstOrDefault(s => s.Equals(sender)).StaffFlights[0].Announcements.Add(announcement);
+            _ctx.Staff.FirstOrDefault(s => s.Equals(sender)).Flight.Announcements.Add(announcement);
             _ctx.SaveChanges();
         }
 

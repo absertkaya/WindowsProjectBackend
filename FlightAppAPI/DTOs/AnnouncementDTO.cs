@@ -15,7 +15,7 @@ namespace FlightAppAPI.DTOs
         {
             return new AnnouncementDTO()
             {
-                AnnouncementId = announcement.AnnouncementId,
+                AnnouncementId = announcement.Id,
                 TimeStamp = announcement.Timestamp,
                 Title = announcement.Title,
                 Content = announcement.Content

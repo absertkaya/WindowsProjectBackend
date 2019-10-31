@@ -1,20 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlightAppAPI.Domain
 {
     public class Passenger : ApplicationUser
     {
-        public IList<PassengerFlight> PassengerFlights { get; set; }
+        public int SeatId { get; set; }
+
+        public IList<Order> Orders { get; set; }
+        public IList<Message> SentMessages { get; set; }
+        public IList<Message> ReceivedMessages { get; set; }
+        public IList<Passenger> Friends { get; set; }
+        [Required]
+        public Seat Seat { get; set; }
 
         public Passenger()
         {
-            PassengerFlights = new List<PassengerFlight>();
+            Orders = new List<Order>();
+            SentMessages = new List<Message>();
+            ReceivedMessages = new List<Message>();
+            Friends = new List<Passenger>();
             Type = UserType.PASSENGER;
-        }
-
-        public void AddFlight(Flight flight, Seat seat)
-        {
-            PassengerFlights.Add(new PassengerFlight(this, flight, seat));
         }
     }
 }

@@ -32,7 +32,7 @@ namespace FlightAppAPI.Data.Repositories
 
         public Staff GetStaffBy(string email)
         {
-            return _ctx.Staff.Include(s => s.StaffFlights).FirstOrDefault(u => u.Email == email);
+            return _ctx.Staff.Include(s => s.Flight).FirstOrDefault(u => u.Email == email);
         }
 
         public void SaveChanges()
