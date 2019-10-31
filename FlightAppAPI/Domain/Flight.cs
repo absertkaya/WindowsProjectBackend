@@ -21,6 +21,7 @@ namespace FlightAppAPI.Domain
         public IList<Announcement> Announcements { get; set; }
         public IList<Seat> Seats { get; set; }
         public IList<Staff> Staff { get; set; }
+        public IList<Order> Orders { get; set; }
 
         public Flight()
         {

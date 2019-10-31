@@ -7,13 +7,14 @@ namespace FlightAppAPI.Data.Repositories
 {
     public class ApplicationUserRepository : IApplicationUserRepository
     {
-
+        #region Init
         private readonly ApplicationDbContext _ctx;
-
+        
         public ApplicationUserRepository(ApplicationDbContext ctx)
         {
             _ctx = ctx;
         }
+        #endregion
 
         public void AddStaff(Staff user)
         {
@@ -27,7 +28,7 @@ namespace FlightAppAPI.Data.Repositories
 
         public Passenger GetPassengerBy(string email)
         {
-            return _ctx.Passengers.FirstOrDefault(u => u.Email == email);
+            return _ctx.Passengers.Include(p => p.Seat).ThenInclude(s => s.Flight).FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
         }
 
         public Staff GetStaffBy(string email)

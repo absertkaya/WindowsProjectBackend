@@ -19,47 +19,31 @@ namespace FlightAppAPI.Controllers
     public class AnnouncementController : ControllerBase
     {
         #region Init
-        private readonly IAnnouncementRepository _announcementRepo;
         private readonly IApplicationUserRepository _userRepository;
+        private readonly IFlightRepository _flightRepository;
 
         public AnnouncementController(
-            IAnnouncementRepository announcementRepo,
-            IApplicationUserRepository userRepository)
+            IApplicationUserRepository userRepository,
+            IFlightRepository flightRepository)
         {
-            _announcementRepo = announcementRepo;
             _userRepository = userRepository;
+            _flightRepository = flightRepository;
         }
         #endregion
 
-        // GET: api/Announcement/get_all
+        // GET: api/Announcement/get_by_flight/{id}
         /// <summary>
-        /// Get all announcements
+        /// Get all announcements of the specified flight
         /// </summary>
-        /// <returns>200: all announcements</returns>
-        [HttpGet("get_all")]
-        public ActionResult<IEnumerable<AnnouncementDTO>> GetAllAnnouncements()
+        /// <param name="id">The id of the flight</param>
+        /// <returns>200: all announcements of the specified flight</returns>
+        [HttpGet("get_by_flight/{id}")]
+        public ActionResult<IEnumerable<AnnouncementDTO>> GetAnnouncementsByFlight(int id)
         {
             try
             {
-                IList<Announcement> announcements = _announcementRepo.GetAllAnnouncements();
+                IList<Announcement> announcements = _flightRepository.GetAnnouncementsBy(id);
                 return Ok(announcements.Select(AnnouncementDTO.FromAnnouncement));
-            }
-            catch (Exception e) { return BadRequest(e.Message); }
-        }
-
-        // GET: api/Announcement/{id}
-        /// <summary>
-        /// Get the Announcement with the given id
-        /// </summary>
-        /// <returns>200: requested announcement</returns>
-        [HttpGet("{id}")]
-        public ActionResult<AnnouncementDTO> GetAnnouncementById(int id)
-        {
-            try
-            {
-                Announcement announcement = _announcementRepo.GetById(id);
-                if (announcement is null) return NotFound();
-                return Ok(AnnouncementDTO.FromAnnouncement(announcement));
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
@@ -69,9 +53,10 @@ namespace FlightAppAPI.Controllers
         /// Add the Announcement with the given properties
         /// </summary>
         /// <param name="announcementDTO">The announcement details</param>
+        /// <param name="id">The id of the flight</param>
         /// <returns>201: created announcement</returns>
-        [HttpPost]
-        public ActionResult CreateAnnouncement(AnnouncementCreateDTO announcementDTO)
+        [HttpPost("create_by_flight/{id}")]
+        public ActionResult CreateAnnouncement(AnnouncementCreateDTO announcementDTO, int id)
         {
             try
             {
@@ -81,30 +66,12 @@ namespace FlightAppAPI.Controllers
                 Announcement announcement = new Announcement
                 {
                     Title = announcementDTO.Title,
-                    Content = announcementDTO.Content
+                    Content = announcementDTO.Content,
+                    Sender = user
                 };
-                _announcementRepo.Add(announcement, user);
+                _flightRepository.CreateAnnouncement(id, announcement);
+                _flightRepository.SaveChanges();
                 return Created("", AnnouncementDTO.FromAnnouncement(announcement));
-            }
-            catch (Exception e) { return BadRequest(e.Message); }
-        }
-
-        // DELETE: api/Announcement
-        /// <summary>
-        /// Delete the Announcement with the given id
-        /// </summary>
-        /// <returns>200: deleted announcement</returns>
-        [HttpDelete("{id}")]
-        public ActionResult DeleteAnnouncement(int id)
-        {
-            try
-            {
-                Staff user = _userRepository.GetStaffBy(User.Identity.Name);
-                Announcement announcement = _announcementRepo.GetById(id);
-                if (announcement is null) return NotFound();
-
-                _announcementRepo.Delete(announcement);
-                return Ok(AnnouncementDTO.FromAnnouncement(announcement));
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }

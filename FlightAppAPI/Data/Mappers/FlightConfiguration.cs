@@ -16,6 +16,7 @@ namespace FlightAppAPI.Data.Mappers
             builder.Property(f => f.DepartureDest).IsRequired().HasMaxLength(200);
             builder.Property(f => f.ArrivalDest).IsRequired().HasMaxLength(200);
             builder.HasMany(f => f.Announcements).WithOne().IsRequired();
+            builder.HasMany(f => f.Orders).WithOne();
         }
     }
 }
