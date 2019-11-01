@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 using FlightAppAPI.DTOs;
 using FlightAppAPI.Domain.IRepositories;
 using FlightAppAPI.Domain;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace FlightAppAPI.Controllers
 {
@@ -60,16 +59,10 @@ namespace FlightAppAPI.Controllers
                     if (result.Succeeded)
                     {
                         string token = GetToken(user);
+                        ApplicationUser appUser = _userRepository.GetUserBy(model.Email);
                         PassengerDTO passengerDTO;
-                        if (_userRepository.GetPassengerBy(model.Email) is null)
-                        {
-                            passengerDTO = PassengerDTO.FromStaff(_userRepository.GetStaffBy(model.Email));
-                        }
-                        else
-                        { 
-                            passengerDTO = PassengerDTO.FromPassenger(_userRepository.GetPassengerBy(model.Email));
-                        }
-
+                        if (appUser.Type.Equals(UserType.PASSENGER)) passengerDTO = PassengerDTO.FromPassenger((Passenger) appUser);
+                        else passengerDTO = PassengerDTO.FromStaff((Staff) appUser);
                         passengerDTO.Token = token;
                         return Created("", passengerDTO);
                     }

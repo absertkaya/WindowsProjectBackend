@@ -16,29 +16,19 @@ namespace FlightAppAPI.Data.Repositories
         }
         #endregion
 
-        public void AddStaff(Staff user)
+        public void AddUser(ApplicationUser user)
         {
-            _ctx.Staff.Add(user);
-        }
-
-        public void AddPassenger(Passenger user)
-        {
-            _ctx.Passengers.Add(user);
-        }
-
-        public Passenger GetPassengerBy(string email)
-        {
-            return _ctx.Passengers.Include(p => p.Seat).ThenInclude(s => s.Flight).FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
-        }
-
-        public Staff GetStaffBy(string email)
-        {
-            return _ctx.Staff.Include(s => s.Flight).FirstOrDefault(u => u.Email == email);
-        }
-
-        public void SaveChanges()
-        {
+            if(user.Type.Equals(UserType.PASSENGER)) _ctx.Passengers.Add((Passenger) user);
+            else _ctx.Staff.Add((Staff) user);
             _ctx.SaveChanges();
+        }
+
+        public ApplicationUser GetUserBy(string email)
+        {
+            ApplicationUser user = _ctx.ApplicationUsers.FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
+            if (user is null) return null;
+            if (user.Type.Equals(UserType.PASSENGER)) return _ctx.Passengers.Include(p => p.Seat).ThenInclude(s => s.Flight).FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
+            return _ctx.Staff.Include(s => s.Flight).FirstOrDefault(u => u.Email == email);
         }
     }
 }

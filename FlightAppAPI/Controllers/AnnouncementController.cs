@@ -6,7 +6,6 @@ using FlightAppAPI.Domain.IRepositories;
 using FlightAppAPI.DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightAppAPI.Controllers
@@ -60,14 +59,14 @@ namespace FlightAppAPI.Controllers
         {
             try
             {
-                Staff user = _userRepository.GetStaffBy(User.Identity.Name);
-                if (user is null) return Unauthorized();
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
 
                 Announcement announcement = new Announcement
                 {
                     Title = announcementDTO.Title,
                     Content = announcementDTO.Content,
-                    Sender = user
+                    Sender = (Staff) user
                 };
                 _flightRepository.CreateAnnouncement(id, announcement);
                 _flightRepository.SaveChanges();

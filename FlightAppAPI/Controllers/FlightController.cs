@@ -1,10 +1,12 @@
 ﻿using FlightAppAPI.Domain;
 using FlightAppAPI.Domain.IRepositories;
+using FlightAppAPI.DTOs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FlightAppAPI.Controllers
 {
@@ -39,12 +41,12 @@ namespace FlightAppAPI.Controllers
         {
             try
             {
-                Staff user = _userRepository.GetStaffBy(User.Identity.Name);
-                if (user is null) return Unauthorized();
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
                 Flight flight = _flightRepository.GetFlightBy(id);
                 if (flight is null) return NotFound();
 
-                return Ok(flight);
+                return Ok(FlightDTO.FromFlight(flight));
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
@@ -60,12 +62,11 @@ namespace FlightAppAPI.Controllers
         {
             try
             {
-                Staff user = _userRepository.GetStaffBy(User.Identity.Name);
-                if (user is null) return Unauthorized();
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
                 IList<Order> orders = _flightRepository.GetOrdersBy(id);
                 if (orders is null) return NotFound();
-
-                return Ok(orders);
+                return Ok(orders.Select(OrderDTO.FromOrder));
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
@@ -75,6 +76,7 @@ namespace FlightAppAPI.Controllers
         /// Get the products
         /// </summary>
         /// <returns>200: the products</returns>
+        [AllowAnonymous]
         [HttpGet("get_products")]
         public ActionResult GetProducts()
         {
@@ -99,12 +101,12 @@ namespace FlightAppAPI.Controllers
         {
             try
             {
-                Staff user = _userRepository.GetStaffBy(User.Identity.Name);
-                if (user is null) return Unauthorized();
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
                 IList<Seat> seats = _flightRepository.GetSeatsBy(id);
                 if (seats is null) return NotFound();
 
-                return Ok(seats);
+                return Ok(seats.Select(SeatDTO.FromSeat));
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
@@ -121,8 +123,8 @@ namespace FlightAppAPI.Controllers
         {
             try
             {
-                Staff user = _userRepository.GetStaffBy(User.Identity.Name);
-                if (user is null) return Unauthorized();
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
 
                 _flightRepository.MovePassenger(id, id2);
                 _flightRepository.SaveChanges();
@@ -144,14 +146,14 @@ namespace FlightAppAPI.Controllers
         {
             try
             {
-                Passenger user = _userRepository.GetPassengerBy(User.Identity.Name);
-                if (user is null) return Unauthorized();
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                if (user is null || !user.Type.Equals(UserType.PASSENGER)) return Unauthorized();
 
-                Order order = new Order { Customer = user, OrderLines = orderLines };
+                Order order = new Order { Customer = (Passenger) user, OrderLines = orderLines };
                 _flightRepository.PlaceOrder(id, order);
                 _flightRepository.SaveChanges();
 
-                return Ok(order);
+                return Ok(OrderDTO.FromOrder(order));
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }

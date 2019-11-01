@@ -21,7 +21,7 @@ namespace FlightAppAPI.Data.Repositories
         private IQueryable<Flight> Flights => _flights
             .Include(f => f.Announcements).ThenInclude(a => a.Sender)
             .Include(f => f.Orders).ThenInclude(o => o.OrderLines).ThenInclude(p => p.Product)
-            .Include(f => f.Orders).ThenInclude(o => o.Customer)
+            .Include(f => f.Orders).ThenInclude(o => o.Customer).ThenInclude(p => p.Seat)
             .Include(f => f.Seats).ThenInclude(s => s.Passenger);
         #endregion
         public void CreateAnnouncement(int flight, Announcement announcement) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Add(announcement);
@@ -42,8 +42,8 @@ namespace FlightAppAPI.Data.Repositories
 
         public void MovePassenger(int seat1, int seat2)
         {
-            Seat _seat1 = _context.Seats.FirstOrDefault(s => s.Id.Equals(seat1));
-            Seat _seat2 = _context.Seats.FirstOrDefault(s => s.Id.Equals(seat2));
+            Seat _seat1 = _context.Seats.Include(s => s.Passenger).FirstOrDefault(s => s.Id.Equals(seat1));
+            Seat _seat2 = _context.Seats.Include(s => s.Passenger).FirstOrDefault(s => s.Id.Equals(seat2));
             Passenger placeholder = _seat1.Passenger;
             _seat1.Passenger = _seat2.Passenger;
             _seat2.Passenger = placeholder;
