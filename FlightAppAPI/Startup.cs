@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using FlightAppAPI.Data;
 using FlightAppAPI.Data.Repositories;
@@ -54,14 +55,20 @@ namespace FlightAppAPI
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Flight API", Version = "v1" });
-                c.AddSecurityDefinition("JWT", new ApiKeyScheme
+                c.SwaggerDoc("v1", new Info { Title = "flightApp API", Version = "V1" });
+
+                var security = new Dictionary<string, IEnumerable<string>>
                 {
-                    Description = "Standard Authorization header using the Bearer scheme.Example: \"bearer {token}\"",
-                    In = "header",
+                    {"Bearer", new string[] { }},
+                };
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
+                    In = "header",
                     Type = "apiKey"
                 });
+                c.AddSecurityRequirement(security);
             });
 
             services.Configure<IdentityOptions>(options =>
