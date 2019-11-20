@@ -33,6 +33,8 @@ namespace FlightAppAPI.Data.Repositories
 
         public Flight GetFlightBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight));
 
+        public Flight GetFlightDetailBy(int flight) => _context.Flights.FirstOrDefault(f => f.Id == flight);
+
         public IList<Order> GetOrdersBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Orders;
 
         public IList<Product> GetProducts() => _context.Products.ToList();

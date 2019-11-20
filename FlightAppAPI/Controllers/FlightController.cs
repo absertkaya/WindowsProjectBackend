@@ -51,6 +51,24 @@ namespace FlightAppAPI.Controllers
             catch (Exception e) { return BadRequest(e.Message); }
         }
 
+        // GET: api/Flight/Detail/{id}
+        /// <summary>
+        /// Get the specified flight
+        /// </summary>
+        /// <param name="id">The id of the flight</param>
+        /// <returns>200: the flight</returns>
+        [HttpGet("detail/{id}")]
+        public ActionResult GetFlightDetailBy(int id)
+        {
+            try
+            {
+                Flight flight = _flightRepository.GetFlightDetailBy(id);
+                if (flight is null) return NotFound();
+                return Ok(FlightMinimalDTO.FromFlight(flight));
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
+
         // GET: api/Flight/{id}/get_orders
         /// <summary>
         /// Get the orders from the specified flight

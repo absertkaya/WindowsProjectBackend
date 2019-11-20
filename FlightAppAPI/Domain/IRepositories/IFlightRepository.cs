@@ -21,6 +21,7 @@ namespace FlightAppAPI.Domain.IRepositories
         IList<Product> GetProducts();
 
         Flight GetFlightBy(int flight);
+        Flight GetFlightDetailBy(int flight);
         void SaveChanges();
     }
 }
