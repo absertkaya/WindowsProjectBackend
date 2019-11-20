@@ -4,7 +4,7 @@ namespace FlightAppAPI.Domain.IRepositories
 {
     public interface IFlightRepository
     {
-        IList<Announcement> GetAnnouncementsBy(int flight);
+        IList<Announcement> GetAnnouncementsBy(int flight, ApplicationUser passenger);
         IList<Announcement> GetPersonalAnnouncementsBy(int flight, Passenger passenger);
         void CreateAnnouncement(int flight, Announcement announcement);
 

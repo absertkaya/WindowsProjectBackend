@@ -41,7 +41,8 @@ namespace FlightAppAPI.Controllers
         {
             try
             {
-                IList<Announcement> announcements = _flightRepository.GetAnnouncementsBy(id);
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                IList<Announcement> announcements = _flightRepository.GetAnnouncementsBy(id, user);
                 return Ok(announcements.Select(AnnouncementDTO.FromAnnouncement));
             }
             catch (Exception e) { return BadRequest(e.Message); }

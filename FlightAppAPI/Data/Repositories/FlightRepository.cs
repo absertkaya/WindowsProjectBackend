@@ -27,7 +27,7 @@ namespace FlightAppAPI.Data.Repositories
         public void CreateAnnouncement(int flight, Announcement announcement) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Add(announcement);
 
 
-        public IList<Announcement> GetAnnouncementsBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Where(a => a.Receiver == null).ToList();
+        public IList<Announcement> GetAnnouncementsBy(int flight, ApplicationUser passenger) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Where(a => a.Receiver == null || a.Receiver == passenger).OrderByDescending(a => a.Timestamp).ToList();
 
         public IList<Announcement> GetPersonalAnnouncementsBy(int flight, Passenger passenger) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Where(a => a.Receiver == passenger).ToList();
 
