@@ -15,6 +15,7 @@ namespace FlightAppAPI.Data.Mappers
             builder.Property(a => a.Title).IsRequired().HasMaxLength(100);
             builder.Property(a => a.Content).IsRequired().HasMaxLength(255);
             builder.HasOne(a => a.Sender).WithMany(s => s.SentAnnouncements).IsRequired();
+            builder.HasOne(a => a.Receiver).WithMany(s => s.ReceivedAnnouncements);
         }
     }
 }

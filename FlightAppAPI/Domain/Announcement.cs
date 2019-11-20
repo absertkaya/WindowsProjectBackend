@@ -17,6 +17,9 @@ namespace FlightAppAPI.Domain
         [Required]
         public Staff Sender { get; set; }
 
+        //if null => general announcement
+        public Passenger Receiver { get; set; } = null;
+
         public Announcement()
         {
             Timestamp = DateTime.Now;

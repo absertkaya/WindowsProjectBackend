@@ -26,7 +26,10 @@ namespace FlightAppAPI.Data.Repositories
         #endregion
         public void CreateAnnouncement(int flight, Announcement announcement) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Add(announcement);
 
-        public IList<Announcement> GetAnnouncementsBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements;
+
+        public IList<Announcement> GetAnnouncementsBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Where(a => a.Receiver == null).ToList();
+
+        public IList<Announcement> GetPersonalAnnouncementsBy(int flight, Passenger passenger) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Where(a => a.Receiver == passenger).ToList();
 
         public Flight GetFlightBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight));
 
@@ -54,6 +57,11 @@ namespace FlightAppAPI.Data.Repositories
         public void SaveChanges()
         {
             _context.SaveChanges();
+        }
+
+        public IList<Passenger> GetPassengersBy(int flight)
+        {
+            return Flights.FirstOrDefault(f => f.Id.Equals(flight)).Seats.Where(s => s.Passenger != null).Select(s => s.Passenger).ToList();
         }
     }
 }

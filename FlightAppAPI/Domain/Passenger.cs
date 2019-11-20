@@ -12,6 +12,7 @@ namespace FlightAppAPI.Domain
         public IList<Message> SentMessages { get; set; }
         public IList<Message> ReceivedMessages { get; set; }
         public IList<Friend> Friends { get; set; }
+        public IList<Announcement> ReceivedAnnouncements { get; set; }
         [Required]
         public Seat Seat { get; set; }
 

@@ -99,16 +99,33 @@ namespace FlightAppAPI.Controllers
         [HttpGet("{id}/get_seats")]
         public ActionResult GetSeatsBy(int id)
         {
-            try
-            {
+            
                 ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
                 if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
                 IList<Seat> seats = _flightRepository.GetSeatsBy(id);
                 if (seats is null) return NotFound();
 
                 return Ok(seats.Select(SeatDTO.FromSeat));
-            }
-            catch (Exception e) { return BadRequest(e.Message); }
+            
+        }
+
+        // GET: api/Flight/{id}/get_passengers
+        /// <summary>
+        /// Get the passengers from the specified flight
+        /// </summary>
+        /// <param name="id">The id of the flight</param>
+        /// <returns>200: the passengers</returns>
+        [HttpGet("{id}/get_passengers")]
+        public ActionResult GetPassengersBy(int id)
+        {
+
+            ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+            if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
+            IList<Passenger> passengers = _flightRepository.GetPassengersBy(id);
+            if (passengers is null) return NotFound();
+
+            return Ok(passengers.Select(PassengerDTO.FromPassenger));
+
         }
 
         // POST: api/Flight/move_passenger/{id}/{id2}

@@ -11,6 +11,7 @@ namespace FlightAppAPI.DTOs
 
         public class PassengerMinimal
         {
+            public int Id { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
         }
@@ -22,7 +23,7 @@ namespace FlightAppAPI.DTOs
                 Nr = seat.Nr,
                 ClassType = seat.ClassType,
                 Passenger = (seat.Passenger is null? null : 
-                    new PassengerMinimal { FirstName = seat.Passenger.FirstName, LastName = seat.Passenger.LastName })
+                    new PassengerMinimal { Id = seat.Passenger.Id, FirstName = seat.Passenger.FirstName, LastName = seat.Passenger.LastName })
             };
         }
     }

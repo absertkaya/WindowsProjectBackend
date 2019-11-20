@@ -30,5 +30,11 @@ namespace FlightAppAPI.Data.Repositories
             if (user.Type.Equals(UserType.PASSENGER)) return _ctx.Passengers.Include(p => p.Seat).ThenInclude(s => s.Flight).FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
             return _ctx.Staff.Include(s => s.Flight).FirstOrDefault(u => u.Email == email);
         }
+
+        public ApplicationUser GetUserById(int id)
+        {
+            ApplicationUser user = _ctx.ApplicationUsers.FirstOrDefault(u => u.Id == id);
+            return user;
+        }
     }
 }

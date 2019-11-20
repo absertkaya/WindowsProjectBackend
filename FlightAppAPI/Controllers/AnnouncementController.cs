@@ -47,6 +47,18 @@ namespace FlightAppAPI.Controllers
             catch (Exception e) { return BadRequest(e.Message); }
         }
 
+        [HttpGet("get_personal_by_flight/{flightId}/{passengerId}")]
+        public ActionResult<IEnumerable<AnnouncementDTO>> GetPersonalAnnouncementsByFlight(int flightId, int passengerId)
+        {
+            try
+            {
+                Passenger passenger = (Passenger)_userRepository.GetUserById(passengerId);
+                IList<Announcement> announcements = _flightRepository.GetPersonalAnnouncementsBy(flightId, passenger);
+                return Ok(announcements.Select(AnnouncementDTO.FromAnnouncement));
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
+
         // POST: api/Announcement
         /// <summary>
         /// Add the Announcement with the given properties
@@ -62,11 +74,19 @@ namespace FlightAppAPI.Controllers
                 ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
                 if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
 
+                Passenger receiver = null;
+                if (announcementDTO.PassengerId != null)
+                {
+                    receiver = (Passenger)_userRepository.GetUserById((int)announcementDTO.PassengerId);
+                }
+
                 Announcement announcement = new Announcement
                 {
                     Title = announcementDTO.Title,
                     Content = announcementDTO.Content,
-                    Sender = (Staff) user
+                    Sender = (Staff)user,
+                    Receiver = receiver
+                    
                 };
                 _flightRepository.CreateAnnouncement(id, announcement);
                 _flightRepository.SaveChanges();

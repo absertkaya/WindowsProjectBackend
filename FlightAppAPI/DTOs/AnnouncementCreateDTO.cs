@@ -10,5 +10,7 @@ namespace FlightAppAPI.DTOs
         [Required]
         [MaxLength(255)]
         public string Content { get; set; }
+
+        public int? PassengerId { get; set; }
     }
 }

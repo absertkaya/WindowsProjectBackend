@@ -18,7 +18,8 @@ namespace FlightAppAPI.DTOs
                 AnnouncementId = announcement.Id,
                 TimeStamp = announcement.Timestamp,
                 Title = announcement.Title,
-                Content = announcement.Content
+                Content = announcement.Content,
+                PassengerId = announcement.Receiver?.Id
             };
         }
     }
