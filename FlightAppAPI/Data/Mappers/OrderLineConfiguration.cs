@@ -10,10 +10,9 @@ namespace FlightAppAPI.Data.Mappers
         {
             builder.ToTable("OrderLines");
 
-            builder.HasKey(l => new { l.OrderId, l.ProductId });
+            builder.HasKey(l => l.Id);
             builder.Property(l => l.Amount).IsRequired();
-            builder.HasOne(l => l.Order).WithMany(o => o.OrderLines).IsRequired();
-            builder.HasOne(l => l.Product).WithMany();
+            builder.HasOne(l => l.Product);
         }
     }
 }

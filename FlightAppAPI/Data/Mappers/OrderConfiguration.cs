@@ -13,7 +13,8 @@ namespace FlightAppAPI.Data.Mappers
             builder.HasKey(o => o.Id);
             builder.Property(o => o.Timestamp).IsRequired();
             builder.Property(o => o.OrderStatus).IsRequired();
-            builder.HasMany(o => o.OrderLines).WithOne(l => l.Order);
+            builder.HasOne(o => o.Customer).WithMany(p => p.Orders).IsRequired();
+            builder.HasMany(o => o.OrderLines).WithOne().IsRequired();
         }
     }
 }

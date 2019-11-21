@@ -33,6 +33,7 @@ namespace FlightAppAPI
             services.AddScoped<DataInitializer>();
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IFlightRepository, FlightRepository>();
+            services.AddScoped<IShopRepository, ShopRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAuthentication(x =>

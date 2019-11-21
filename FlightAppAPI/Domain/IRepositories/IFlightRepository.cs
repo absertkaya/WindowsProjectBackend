@@ -14,12 +14,6 @@ namespace FlightAppAPI.Domain.IRepositories
         IList<Passenger> GetPassengersBy(int flight);
         void MovePassenger(int seat1, int seat2);
 
-        void PlaceOrder(int flight, Order order);
-        IList<Order> GetOrdersBy(int flight);
-        void HandleOrder(int order);
-
-        IList<Product> GetProducts();
-
         Flight GetFlightBy(int flight);
         Flight GetFlightDetailBy(int flight);
         void SaveChanges();

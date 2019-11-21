@@ -19,6 +19,13 @@ namespace FlightAppAPI.Domain
         {
             OrderLines = new List<OrderLine>();
             OrderStatus = OrderStatus.PENDING;
+            Timestamp = DateTime.Now;
+        }
+
+        public Order(IList<OrderLine> orderLines, Passenger customer) : this()
+        {
+            Customer = customer;
+            OrderLines = orderLines;
         }
     }
 }

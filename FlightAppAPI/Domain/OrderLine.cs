@@ -7,11 +7,8 @@ namespace FlightAppAPI.Domain
     {
         private int _amount = 1;
 
-        public int OrderId { get; set; }
-        public int ProductId { get; set; }
-
-        [Required]
-        public Order Order { get; set; }
+        public int Id { get; set; }
+        
         [Required]
         public Product Product { get; set; }
         [Required]
@@ -20,13 +17,14 @@ namespace FlightAppAPI.Domain
             set { if (value < 1) throw new ArgumentException("An order has a minimum amount of 1."); _amount = value; }
         }
 
-        public OrderLine(Order order, Product product)
+        public OrderLine(Product product)
         {
-            OrderId = order.Id;
-            ProductId = product.Id;
-
-            Order = order;
             Product = product;
+        }
+        public OrderLine(Product product, int amount)
+        {
+            Product = product;
+            Amount = amount;
         }
         private OrderLine() { }
     }

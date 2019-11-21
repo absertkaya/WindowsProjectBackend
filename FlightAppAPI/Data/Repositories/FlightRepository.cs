@@ -25,8 +25,7 @@ namespace FlightAppAPI.Data.Repositories
             .Include(f => f.Seats).ThenInclude(s => s.Passenger);
         #endregion
         public void CreateAnnouncement(int flight, Announcement announcement) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Add(announcement);
-
-
+        
         public IList<Announcement> GetAnnouncementsBy(int flight, ApplicationUser passenger) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Where(a => a.Receiver == null || a.Receiver == passenger).OrderByDescending(a => a.Timestamp).ToList();
 
         public IList<Announcement> GetPersonalAnnouncementsBy(int flight, Passenger passenger) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Announcements.Where(a => a.Receiver == passenger).ToList();
@@ -35,15 +34,9 @@ namespace FlightAppAPI.Data.Repositories
 
         public Flight GetFlightDetailBy(int flight) => _context.Flights.FirstOrDefault(f => f.Id == flight);
 
-        public IList<Order> GetOrdersBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Orders;
-
-        public IList<Product> GetProducts() => _context.Products.ToList();
-
         public IList<Seat> GetSeatsBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Seats;
 
         public IList<Staff> GetStaffBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Staff;
-
-        public void HandleOrder(int order) => _context.Orders.FirstOrDefault(o => o.Id.Equals(order)).OrderStatus = OrderStatus.HANDLED;
 
         public void MovePassenger(int seat1, int seat2)
         {
@@ -53,8 +46,6 @@ namespace FlightAppAPI.Data.Repositories
             _seat1.Passenger = _seat2.Passenger;
             _seat2.Passenger = placeholder;
         }
-
-        public void PlaceOrder(int flight, Order order) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Orders.Add(order);
 
         public void SaveChanges()
         {
