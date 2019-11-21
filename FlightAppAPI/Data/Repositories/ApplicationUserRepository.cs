@@ -27,7 +27,7 @@ namespace FlightAppAPI.Data.Repositories
         {
             ApplicationUser user = _ctx.ApplicationUsers.FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
             if (user is null) return null;
-            if (user.Type.Equals(UserType.PASSENGER)) return _ctx.Passengers.Include(p => p.Seat).ThenInclude(s => s.Flight).FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
+            if (user.Type.Equals(UserType.PASSENGER)) return _ctx.Passengers.Include(p => p.Seat).ThenInclude(s => s.Flight).Include(u => u.Orders).ThenInclude(o => o.OrderLines).ThenInclude(p => p.Product).FirstOrDefault(u => u.Email.ToUpper().Equals(email.ToUpper()));
             return _ctx.Staff.Include(s => s.Flight).FirstOrDefault(u => u.Email == email);
         }
 

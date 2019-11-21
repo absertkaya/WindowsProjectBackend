@@ -1,6 +1,7 @@
 ﻿using FlightAppAPI.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FlightAppAPI.DTOs
 {
@@ -17,6 +18,7 @@ namespace FlightAppAPI.DTOs
         public ClassType SeatClass { get; set; }
         public int FlightId { get; set; }
         public UserType Type { get; set; }
+        public List<OrderDTO> Orders { get; set; }
 
         public static PassengerDTO FromPassenger(Passenger passenger)
         {
@@ -31,7 +33,8 @@ namespace FlightAppAPI.DTOs
                 SeatNr = passenger.Seat.Nr,
                 SeatClass = passenger.Seat.ClassType,
                 FlightId = passenger.Seat.Flight.Id,
-                Type = passenger.Type
+                Type = passenger.Type,
+                Orders = passenger.Orders.Select(o => OrderDTO.FromOrder(o)).ToList()
             };
         }
         public static PassengerDTO FromStaff(Staff passenger)
