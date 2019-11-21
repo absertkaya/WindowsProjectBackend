@@ -27,6 +27,8 @@ namespace FlightAppAPI.Data.Repositories
 
         public IList<Order> GetOrdersBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Orders;
 
+        public Product GetProductById(int id) => _context.Products.FirstOrDefault(p => p.Id == id);
+
         public IList<Product> GetProducts() => _context.Products.ToList();
 
         public void HandleOrder(int order) => _context.Orders.FirstOrDefault(o => o.Id.Equals(order)).OrderStatus = OrderStatus.HANDLED;

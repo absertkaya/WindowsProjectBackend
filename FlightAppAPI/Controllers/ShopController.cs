@@ -84,13 +84,22 @@ namespace FlightAppAPI.Controllers
                 ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
                 if (user is null || !user.Type.Equals(UserType.PASSENGER)) return Unauthorized();
 
-                Order order = placeOrder.ToOrder(user as Passenger);
+                Order order = new Order();
+                placeOrder.OrderLines.ToList().ForEach(ol =>
+                {
+                    Product prod = _shopRepository.GetProductById(ol.ProductId);
+                    OrderLine line = new OrderLine(prod, ol.Amount);
+                    order.OrderLines.Add(line);
+                });
+                order.Customer = (Passenger)user;
                 _shopRepository.PlaceOrder(id, order);
                 _shopRepository.SaveChanges();
 
                 return Ok(OrderDTO.FromOrder(order));
+            } catch(Exception e)
+            {
+                return BadRequest(e.Message);
             }
-            catch (Exception e) { return BadRequest(e.Message); }
         }
     }
 }

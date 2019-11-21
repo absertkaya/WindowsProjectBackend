@@ -7,6 +7,7 @@ namespace FlightAppAPI.Domain.IRepositories
         void PlaceOrder(int flight, Order order);
         IList<Order> GetOrdersBy(int flight);
         void HandleOrder(int order);
+        Product GetProductById(int id);
 
         IList<Product> GetProducts();
         void SaveChanges();
