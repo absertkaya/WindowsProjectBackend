@@ -42,9 +42,24 @@ namespace FlightAppAPI.Data.Repositories
         {
             Seat _seat1 = _context.Seats.Include(s => s.Passenger).FirstOrDefault(s => s.Id.Equals(seat1));
             Seat _seat2 = _context.Seats.Include(s => s.Passenger).FirstOrDefault(s => s.Id.Equals(seat2));
-            Passenger placeholder = _seat1.Passenger;
-            _seat1.Passenger = _seat2.Passenger;
-            _seat2.Passenger = placeholder;
+            Passenger pas1 = _seat1.Passenger;
+            Passenger pas2 = _seat2.Passenger;
+
+            _seat1.Passenger = pas2;
+            if (pas2 != null)
+            {
+                pas2.Seat = _seat1;
+                pas2.SeatId = _seat1.Id;
+            }
+            
+            _context.SaveChanges();
+            _seat2.Passenger = pas1;
+            if (pas1 != null)
+            {
+                pas1.Seat = _seat2;
+                pas1.SeatId = _seat2.Id;
+            }
+            _context.SaveChanges();
         }
 
         public void SaveChanges()

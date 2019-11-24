@@ -13,7 +13,7 @@ namespace FlightAppAPI.Data.Mappers
             builder.HasMany(p => p.Orders).WithOne(o => o.Customer);
             builder.HasMany(p => p.SentMessages).WithOne(m => m.Sender);
             builder.HasMany(p => p.ReceivedMessages).WithOne(m => m.Receiver);
-
+            builder.HasOne(p => p.Seat).WithOne(s => s.Passenger);
         }
     }
 }

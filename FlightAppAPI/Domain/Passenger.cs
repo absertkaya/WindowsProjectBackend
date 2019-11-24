@@ -6,14 +6,15 @@ namespace FlightAppAPI.Domain
 {
     public class Passenger : ApplicationUser
     {
-        public int SeatId { get; set; }
+        
 
         public IList<Order> Orders { get; set; }
         public IList<Message> SentMessages { get; set; }
         public IList<Message> ReceivedMessages { get; set; }
         public IList<Friend> Friends { get; set; }
         public IList<Announcement> ReceivedAnnouncements { get; set; }
-        [Required]
+
+        public int SeatId { get; set; }
         public Seat Seat { get; set; }
 
         public Passenger()

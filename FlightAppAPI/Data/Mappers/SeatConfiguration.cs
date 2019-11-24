@@ -13,7 +13,7 @@ namespace FlightAppAPI.Data.Mappers
             builder.HasKey(s => s.Id);
             builder.Property(s => s.Nr).IsRequired();
             builder.Property(s => s.ClassType).IsRequired();
-            builder.HasOne(s => s.Passenger).WithOne(p => p.Seat);
+            builder.HasOne(s => s.Passenger).WithOne(p => p.Seat).HasForeignKey<Passenger>(s => s.SeatId);
             builder.HasOne(s => s.Flight).WithMany(f => f.Seats).IsRequired();
         }
     }
