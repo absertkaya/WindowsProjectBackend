@@ -34,7 +34,7 @@ namespace FlightAppAPI.Data.Repositories
 
         public Flight GetFlightDetailBy(int flight) => _context.Flights.FirstOrDefault(f => f.Id == flight);
 
-        public IList<Seat> GetSeatsBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Seats;
+        public IList<Seat> GetSeatsBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Seats.OrderBy(s => s.Nr).ToList();
 
         public IList<Staff> GetStaffBy(int flight) => Flights.FirstOrDefault(f => f.Id.Equals(flight)).Staff;
 

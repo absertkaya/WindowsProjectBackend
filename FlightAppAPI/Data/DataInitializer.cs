@@ -69,15 +69,15 @@ namespace FlightAppAPI.Data
                 flight.Seats = seats;
                 List<Passenger> passengers = new List<Passenger>
                 {
-                    new Passenger { LastName = "Doe", FirstName = "John", BirthDate = DateTime.Parse("1980/10/10"), Email = "p1@gmail.com", Seat = seats[0] },
-                    new Passenger { LastName = "Smith", FirstName = "James", BirthDate = DateTime.Parse("1980/10/10"), Email = "p2@gmail.com", Seat = seats[1] },
-                    new Passenger { LastName = "Johnson", FirstName = "Robert", BirthDate = DateTime.Parse("1980/10/10"), Email = "p3@gmail.com", Seat = seats[2] },
-                    new Passenger { LastName = "Williams", FirstName = "Mary", BirthDate = DateTime.Parse("1980/10/10"), Email = "p4@gmail.com", Seat = seats[10] },
-                    new Passenger { LastName = "Jones", FirstName = "Jennifer", BirthDate = DateTime.Parse("1980/10/10"), Email = "p5@gmail.com", Seat = seats[11] },
-                    new Passenger { LastName = "Brown", FirstName = "David", BirthDate = DateTime.Parse("1980/10/10"), Email = "p6@gmail.com", Seat = seats[12] },
-                    new Passenger { LastName = "Davis", FirstName = "Richard", BirthDate = DateTime.Parse("1980/10/10"), Email = "p7@gmail.com", Seat = seats[13] },
-                    new Passenger { LastName = "Miller", FirstName = "Susan", BirthDate = DateTime.Parse("1980/10/10"), Email = "p8@gmail.com", Seat = seats[14] },
-                    new Passenger { LastName = "Wilson", FirstName = "Elizabeth", BirthDate = DateTime.Parse("1980/10/10"), Email = "p9@gmail.com", Seat = seats[15] },
+                    new Passenger { LastName = "Doe", FirstName = "John", BirthDate = DateTime.Parse("1980/10/10"), Email = "p1@gmail.com"},
+                    new Passenger { LastName = "Smith", FirstName = "James", BirthDate = DateTime.Parse("1980/10/10"), Email = "p2@gmail.com"},
+                    new Passenger { LastName = "Johnson", FirstName = "Robert", BirthDate = DateTime.Parse("1980/10/10"), Email = "p3@gmail.com"},
+                    new Passenger { LastName = "Williams", FirstName = "Mary", BirthDate = DateTime.Parse("1980/10/10"), Email = "p4@gmail.com"},
+                    new Passenger { LastName = "Jones", FirstName = "Jennifer", BirthDate = DateTime.Parse("1980/10/10"), Email = "p5@gmail.com" },
+                    new Passenger { LastName = "Brown", FirstName = "David", BirthDate = DateTime.Parse("1980/10/10"), Email = "p6@gmail.com"},
+                    new Passenger { LastName = "Davis", FirstName = "Richard", BirthDate = DateTime.Parse("1980/10/10"), Email = "p7@gmail.com" },
+                    new Passenger { LastName = "Miller", FirstName = "Susan", BirthDate = DateTime.Parse("1980/10/10"), Email = "p8@gmail.com"},
+                    new Passenger { LastName = "Wilson", FirstName = "Elizabeth", BirthDate = DateTime.Parse("1980/10/10"), Email = "p9@gmail.com"},
                 };
                 seats[0].Passenger = passengers[0];
                 seats[1].Passenger = passengers[1];

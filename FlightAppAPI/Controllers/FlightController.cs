@@ -118,8 +118,7 @@ namespace FlightAppAPI.Controllers
         [HttpPost("move_passenger/{id}/{id2}")]
         public ActionResult MovePassenger(int id, int id2)
         {
-            try
-            {
+
                 ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
                 if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
 
@@ -127,8 +126,7 @@ namespace FlightAppAPI.Controllers
                 _flightRepository.SaveChanges();
 
                 return Ok();
-            }
-            catch (Exception e) { return BadRequest(e.Message); }
+
         }
     }
 }
