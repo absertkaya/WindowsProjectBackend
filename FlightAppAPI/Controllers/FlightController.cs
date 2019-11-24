@@ -69,6 +69,72 @@ namespace FlightAppAPI.Controllers
             catch (Exception e) { return BadRequest(e.Message); }
         }
 
+        // GET: api/Flight/friends/{id}
+        /// <summary>
+        /// Get the specified flight
+        /// </summary>
+        /// <param name="id">The id of the flight</param>
+        /// <returns>200: the flight</returns>
+        [HttpGet("friends/{flightId}")]
+        public ActionResult GetFriends(int flightId)
+        {
+            try
+            {
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                IList<Passenger> pass = _flightRepository.GetFriends(flightId, user.Id);
+                if (pass is null) return NotFound();
+                return Ok(pass.Select(FriendDTO.FromPassenger));
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
+
+        // GET: api/Flight/friends/{id}
+        /// <summary>
+        /// Get the specified flight
+        /// </summary>
+        /// <param name="id">The id of the flight</param>
+        /// <returns>200: the flight</returns>
+        [HttpGet("messages/{friendId}")]
+        public ActionResult GetMessages(int friendId)
+        {
+            try
+            {
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                IList<Message> messages = _flightRepository.GetMessages(user.Id, friendId);
+                if (messages is null) return NotFound();
+                return Ok(messages.Select(MessageDTO.FromMessage));
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
+
+        // GET: api/Flight/friends/{id}
+        /// <summary>
+        /// Get the specified flight
+        /// </summary>
+        /// <param name="id">The id of the flight</param>
+        /// <returns>200: the flight</returns>
+        [HttpPost("messages/{friendId}")]
+        public ActionResult PostMessage(int friendId, MessageDTO dto)
+        {
+            try
+            {
+                Passenger user = (Passenger)_userRepository.GetUserBy(User.Identity.Name);
+                Passenger friend = (Passenger)_userRepository.GetUserById(friendId);
+                Message message = new Message
+                {
+                    Content = dto.Content,
+                    Sender = user,
+                    Receiver = friend,
+                    Timestamp = DateTime.Now
+                };
+                user.SentMessages.Add(message);
+                friend.ReceivedMessages.Add(message);
+                _flightRepository.SaveChanges();
+                return Created("", MessageDTO.FromMessage(message));
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
+
 
         // GET: api/Flight/{id}/get_seats
         /// <summary>

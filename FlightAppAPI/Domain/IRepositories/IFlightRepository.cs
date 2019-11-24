@@ -8,6 +8,9 @@ namespace FlightAppAPI.Domain.IRepositories
         IList<Announcement> GetPersonalAnnouncementsBy(int flight, Passenger passenger);
         void CreateAnnouncement(int flight, Announcement announcement);
 
+        IList<Passenger> GetFriends(int flightId, int passengerId);
+        IList<Message> GetMessages(int id, int friendId);
+
         IList<Staff> GetStaffBy(int flight);
 
         IList<Seat> GetSeatsBy(int flight);

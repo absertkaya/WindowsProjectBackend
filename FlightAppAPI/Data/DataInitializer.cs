@@ -89,6 +89,23 @@ namespace FlightAppAPI.Data
                 seats[14].Passenger = passengers[7];
                 seats[15].Passenger = passengers[8];
                 passengers[0].AddFriend(passengers[1]);
+                List<Message> messages = new List<Message>
+                {
+                    new Message {Receiver = passengers[0], Sender= passengers[1], Content = "Yo, what's up?", Timestamp = DateTime.Now},
+                    new Message {Receiver = passengers[1], Sender= passengers[0], Content = "Not much, just enjoying the scenery. You?", Timestamp = DateTime.Now.AddMinutes(5)},
+                    new Message {Receiver = passengers[0], Sender= passengers[1], Content = "Nice", Timestamp = DateTime.Now.AddMinutes(7)},
+                    new Message {Receiver = passengers[0], Sender= passengers[1], Content = "Same, it's still such a long way till we get there. I'm kinda bored.", Timestamp = DateTime.Now.AddMinutes(8)},
+                };
+                passengers[0].SentMessages.Add(messages[0]);
+                passengers[0].ReceivedMessages.Add(messages[1]);
+                passengers[0].SentMessages.Add(messages[2]);
+                passengers[0].SentMessages.Add(messages[3]);
+                
+                passengers[1].ReceivedMessages.Add(messages[0]);
+                passengers[1].SentMessages.Add(messages[1]);
+                passengers[1].ReceivedMessages.Add(messages[2]);
+                passengers[1].ReceivedMessages.Add(messages[3]);
+
                 await CreateUser("p1@gmail.com", "Password1*");
                 await CreateUser("p2@gmail.com", "Password1*");
                 await CreateUser("p3@gmail.com", "Password1*");
@@ -98,64 +115,6 @@ namespace FlightAppAPI.Data
                 flight.Announcements.Add(new Announcement { Sender = staff, Title = "Turbulence", Content = "We will be experiencing turbulence for the next 15 minutes. Please tighten seatbelt" });
                 flight.Staff.Add(staff);
                 _ctx.Flights.Add(flight);
-
-                /*
-                Product proteinBar = new Product() {ProductName = "Protein Bar", Price = 5, AmountInStock = 20, ProductType = ProductType.FOOD };
-                _ctx.Products.Add(proteinBar);
-
-                string email = "client@gmail.com";
-                Passenger p1 = new Passenger() { BirthDate = DateTime.Parse("1980/10/10"), Email = email, FirstName = "bob", LastName = "van damme" };
-                await CreateUser(email, "Password1*");
-                email = "staff@gmail.com";
-                Staff staff = new Staff() { Email = email, BirthDate = DateTime.Parse("10/05/1996"), LastName = "Sertkaya", FirstName = "Abdullah" };
-                await CreateUser(email, "Password1*");
-
-                _ctx.Passengers.Add(p1);
-                _ctx.Staff.Add(staff);
-
-                IList<Seat> seats = new List<Seat>()
-                {
-                    new Seat() {SeatNr = 1, ClassType = ClassType.FIRST, SeatId = 1},
-                    new Seat() {SeatNr = 1, ClassType = ClassType.ECONOMY, SeatId = 2}
-                };
-
-                seats.ToList().ForEach(s => _ctx.Add(s));
-
-                IList<Flight> flights = new List<Flight>()
-                {
-                    new Flight() {
-                        FlightId = 1,
-                        ArrivalDest = "New York",
-                        DepartureDest = "Brussels",
-                        ArrivalTime = DateTime.Parse("2019/10/25"),
-                        DepartureTime = DateTime.Now
-                    },
-                    new Flight() {
-                        FlightId = 2,
-                        ArrivalDest = "Bangkok",
-                        DepartureDest = "Brussels",
-                        ArrivalTime = DateTime.Parse("2019/10/27"),
-                        DepartureTime = DateTime.Now.AddDays(1)
-                    },
-                };
-
-                flights.ToList().ForEach(f => _ctx.Flights.Add(f));
-
-                IList<Announcement> announcements = new List<Announcement>()
-                {
-                    new Announcement() { Title = "Discount on food", Content = "there is a 20% discount going on right now" },
-                    new Announcement() { Title = "Stop pissing next to the toilet", Content = "Some guy keeps pissing on the floor" }
-                };
-
-                announcements.ToList().ForEach(a => _ctx.Announcements.Add(a));
-
-                p1.AddFlight(flights[0], seats[0]);
-                staff.AddFlight(flights[0]);
-                announcements.ToList().ForEach(a => staff.StaffFlights[0].AddAnnouncement(a));
-                Plane plane = new Plane() { Seats = seats, Flights = flights };
-
-                _ctx.Planes.Add(plane);
-                */
                 _ctx.SaveChanges();
             }
         }

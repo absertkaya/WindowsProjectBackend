@@ -71,5 +71,32 @@ namespace FlightAppAPI.Data.Repositories
         {
             return Flights.FirstOrDefault(f => f.Id.Equals(flight)).Seats.Where(s => s.Passenger != null).Select(s => s.Passenger).ToList();
         }
+
+        public IList<Passenger> GetFriends(int flightId, int passengerId)
+        {
+            var frens = _context.Friends
+                .Where(f => f.PassengerId == passengerId || f.Passenger2Id == passengerId)
+                .Include(f => f.Passenger)
+                .ThenInclude(p => p.Seat)
+                .Include(f => f.Passenger2)
+                .ThenInclude(p => p.Seat);
+
+            var f1 = frens.Where(f => f.Passenger.Id != passengerId && f.Passenger2.Id == passengerId).Select(f => f.Passenger).ToList();
+            var f2 = frens.Where(f => f.Passenger.Id == passengerId && f.Passenger2.Id != passengerId).Select(f => f.Passenger2);
+            f1.AddRange(f2);
+
+            return f1.Distinct().ToList();
+                
+        }
+
+        public IList<Message> GetMessages(int id, int friendId)
+        {
+            return _context.Messages
+                .Include(m => m.Sender)
+                .Include(m => m.Receiver)
+                .Where(m => m.Sender.Id == id && m.Receiver.Id == friendId || m.Sender.Id == friendId && m.Receiver.Id == id)
+                .OrderByDescending(m => m.Timestamp)
+                .ToList();
+        }
     }
 }
