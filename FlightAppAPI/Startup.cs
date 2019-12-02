@@ -34,6 +34,7 @@ namespace FlightAppAPI
             services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
             services.AddScoped<IFlightRepository, FlightRepository>();
             services.AddScoped<IShopRepository, ShopRepository>();
+            services.AddScoped<IEntertainmentRepository, EntertainmentRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(cfg => cfg.User.RequireUniqueEmail = true).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddAuthentication(x =>
@@ -115,7 +116,7 @@ namespace FlightAppAPI
 
             app.UseMvc();
 
-            //dataInitializer.InitializeData().Wait();
+            dataInitializer.InitializeData().Wait();
         }
     }
 }
