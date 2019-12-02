@@ -30,7 +30,7 @@ namespace FlightAppAPI.Controllers
         }
         #endregion
 
-        // GET: api/Flight/{id}/get_orders
+        // GET: api/Shop/{id}/get_orders
         /// <summary>
         /// Get the orders from the specified flight
         /// </summary>
@@ -46,6 +46,25 @@ namespace FlightAppAPI.Controllers
                 IList<Order> orders = _shopRepository.GetOrdersBy(id);
                 if (orders is null) return NotFound();
                 return Ok(orders.Select(OrderDTO.FromOrder));
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
+
+        // POST: api/Shop/accept_order/{id}
+        /// <summary>
+        /// Handle the specified order
+        /// </summary>
+        /// <param name="id">The id of the order</param>
+        [HttpGet("accept_order/{id}")]
+        public ActionResult AcceptOrder(int id)
+        {
+            try
+            {
+                ApplicationUser user = _userRepository.GetUserBy(User.Identity.Name);
+                if (user is null || !user.Type.Equals(UserType.STAFF)) return Unauthorized();
+                _shopRepository.HandleOrder(id);
+                _shopRepository.SaveChanges();
+                return Ok();
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
