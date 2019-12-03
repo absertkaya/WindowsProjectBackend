@@ -19,6 +19,7 @@ namespace FlightAppAPI.Data
         public DbSet<Staff> Staff { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<Movie> Movies { get; set; }
+        public DbSet<Music> Music { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) : base(opts)
         {
@@ -38,6 +39,7 @@ namespace FlightAppAPI.Data
             modelBuilder.ApplyConfiguration(new StaffConfiguration());
             modelBuilder.ApplyConfiguration(new FriendConfiguration());
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
+            modelBuilder.ApplyConfiguration(new MusicConfiguration());
         }
     }
 }

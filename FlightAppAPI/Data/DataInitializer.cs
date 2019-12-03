@@ -113,7 +113,6 @@ namespace FlightAppAPI.Data
                 order.OrderLines.Add(line2);
 
                 order.Customer = passengers[0];
-                passengers[0].Orders.Add(order);
 
                 await CreateUser("p1@gmail.com", "Password1*");
                 await CreateUser("p2@gmail.com", "Password1*");
@@ -138,6 +137,21 @@ namespace FlightAppAPI.Data
                     new Movie("Pulp Fiction", DateTime.Parse("21/10/1994"), 154, "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption. ", "Q. Tarantino", "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_UY268_CR1,0,182,268_AL_.jpg", "https://www.youtube.com/embed/s7EdQ4FqbhY")
                 };
                 movies.ForEach(m => _ctx.Movies.Add(m));
+
+                // Music
+                List<Music> music = new List<Music> {
+                    new Music("God's Plan", "Drake", "https://charts-static.billboard.com/img/2018/01/drake-hq6-87x87.jpg"),
+                    new Music("Perfect", "Ed Sheeran", "https://charts-static.billboard.com/img/2017/03/ed-sheeran-buv-87x87.jpg"),
+                    new Music("Meant To Be", "Bebe Rexha", "https://charts-static.billboard.com/img/2017/10/bebe-rexha-8wm-87x87.jpg"),
+                    new Music("Havana", "Camila Cabello", "https://charts-static.billboard.com/img/2017/08/camila-cabello-4tx-87x87.jpg"),
+                    new Music("Rockstar", "Post Malone", "https://charts-static.billboard.com/img/2017/10/post-malone-1vw-87x87.jpg"),
+                    new Music("Psycho", "Post Malone", "https://charts-static.billboard.com/img/2018/03/post-malone-tp6-87x87.jpg"),
+                    new Music("I Like It", "Cardi B", "https://charts-static.billboard.com/img/2018/04/cardi-b-n38-i-like-it-ppy-87x87.jpg"),
+                    new Music("The Middle", "Zedd", "https://charts-static.billboard.com/img/2018/02/zedd-edd-87x87.jpg"),
+                    new Music("In My Feelings", "Drake", "https://charts-static.billboard.com/img/2018/07/drake-zwl-in-my-feelings-591-87x87.jpg"),
+                    new Music("Girls Like You", "Maroon 5", "https://charts-static.billboard.com/img/2018/06/maroon-5-9st-girls-like-you-32b-87x87.jpg")
+                };
+                music.ForEach(m => _ctx.Music.Add(m));
 
                 _ctx.SaveChanges();
             }

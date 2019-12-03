@@ -28,7 +28,6 @@ namespace FlightAppAPI.Controllers
         /// Get the movies
         /// </summary>
         /// <returns>200: the movies</returns>
-        [AllowAnonymous]
         [HttpGet("get_movies")]
         public ActionResult GetMovies()
         {
@@ -38,6 +37,24 @@ namespace FlightAppAPI.Controllers
                 if (movies is null) return NotFound();
 
                 return Ok(movies);
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
+
+        // GET: api/Entertainment/get_music
+        /// <summary>
+        /// Get the music
+        /// </summary>
+        /// <returns>200: the music</returns>
+        [HttpGet("get_music")]
+        public ActionResult GetMusic()
+        {
+            try
+            {
+                IList<Music> music = _entertainmentRepository.GetMusic();
+                if (music is null) return NotFound();
+
+                return Ok(music);
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
