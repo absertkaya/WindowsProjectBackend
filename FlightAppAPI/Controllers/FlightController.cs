@@ -196,5 +196,22 @@ namespace FlightAppAPI.Controllers
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
+
+        // POST: api/Flight/move_passenger/{id}/{id2}
+        /// <summary>
+        /// Switch the passengers on the specified seats
+        /// </summary>
+        /// <param name="id">The first seat</param>
+        /// <param name="id2">The second seat</param>
+        /// <returns>200</returns>
+        [HttpPost("feedback/{id}")]
+        public ActionResult PostFeedback(int id)
+        {
+            try
+            {
+                return Ok();
+            }
+            catch (Exception e) { return BadRequest(e.Message); }
+        }
     }
 }

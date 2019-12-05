@@ -113,6 +113,7 @@ namespace FlightAppAPI.Data
                 Staff staff = new Staff { LastName = "Lee", FirstName = "Stan", BirthDate = DateTime.Parse("1980/10/10"), Email = "staff@gmail.com", Flight = flight };
                 flight.Announcements.Add(new Announcement { Sender = staff, Title = "Flight info", Content = "1 Hour has passed, 14.5 hours to go" });
                 flight.Announcements.Add(new Announcement { Sender = staff, Title = "Turbulence", Content = "We will be experiencing turbulence for the next 15 minutes. Please tighten seatbelt" });
+                flight.Announcements.Add(new Announcement { Sender = staff, Title = "DayTime", Content = "The sun wil be rising soon, and a new day will be upon us" });
                 flight.Staff.Add(staff);
                 _ctx.Flights.Add(flight);
                 _ctx.SaveChanges();

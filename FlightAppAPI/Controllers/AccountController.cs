@@ -89,7 +89,7 @@ namespace FlightAppAPI.Controllers
             var token = new JwtSecurityToken(
               null, null,
               claims,
-              expires: DateTime.Now.AddMinutes(90),
+              expires: DateTime.Now.AddYears(5),
               signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
