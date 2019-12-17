@@ -202,11 +202,5 @@ namespace FlightAppAPI.Controllers
         {
             return Ok();
         }
-
-        [HttpPost("order/{id}")]
-        public ActionResult PostOrder()
-        {
-            return Ok();
-        }
     }
 }
