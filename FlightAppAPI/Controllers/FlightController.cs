@@ -198,12 +198,14 @@ namespace FlightAppAPI.Controllers
         }
 
         [HttpPost("feedback")]
+        [AllowAnonymous]
         public ActionResult PostFeedback(Object obj)
         {
             return Ok();
         }
 
         [HttpPost("order/{id}")]
+        [AllowAnonymous]
         public ActionResult PostOrder()
         {
             return Ok();
