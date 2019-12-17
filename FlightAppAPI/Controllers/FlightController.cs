@@ -196,11 +196,5 @@ namespace FlightAppAPI.Controllers
             }
             catch (Exception e) { return BadRequest(e.Message); }
         }
-
-        [HttpPost("feedback")]
-        public ActionResult PostFeedback()
-        {
-            return Ok();
-        }
     }
 }
