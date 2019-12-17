@@ -198,7 +198,7 @@ namespace FlightAppAPI.Controllers
         }
 
         [HttpPost("feedback")]
-        public ActionResult PostFeedback(Object obj)
+        public ActionResult PostFeedback()
         {
             return Ok();
         }
@@ -208,7 +208,5 @@ namespace FlightAppAPI.Controllers
         {
             return Ok();
         }
-
-
     }
 }
