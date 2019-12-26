@@ -197,18 +197,25 @@ namespace FlightAppAPI.Controllers
             catch (Exception e) { return BadRequest(e.Message); }
         }
 
-        [HttpPost("feedback")]
         [AllowAnonymous]
-        public ActionResult PostFeedback(Object obj)
+        [HttpPost("feedback")]
+        public ActionResult PostFeedback(DTO obj)
         {
             return Ok();
         }
 
-        [HttpPost("order/{id}")]
         [AllowAnonymous]
-        public ActionResult PostOrder(Object obj)
+        [HttpPost("order/{id}")]
+        public ActionResult PostOrder()
         {
             return Ok();
+        }
+
+        public class DTO
+        {
+            public string Title { get; set; }
+            public string Content { get; set; }
+            public string Rating { get; set; }
         }
     }
 }
